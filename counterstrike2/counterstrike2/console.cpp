@@ -28,7 +28,7 @@ void console::log(const wchar_t* message...)
 	wprintf_s(message);
 }
 
-void console::log(const char* message ...)
+void console::log(const char* message...)
 {
 	printf_s(message);
 }

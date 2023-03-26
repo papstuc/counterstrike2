@@ -6,8 +6,7 @@ DWORD WINAPI initialize(void* instance)
 {
 #ifdef _DEBUG
 	console::initialize(L"counterstrike2 debug");
-#endif 
-
+#endif
 
 	FreeLibraryAndExitThread(static_cast<HMODULE>(instance), 0);
 

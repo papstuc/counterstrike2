@@ -87,10 +87,12 @@
     <ClCompile Include="console.cpp" />
     <ClCompile Include="entry.cpp" />
     <ClCompile Include="utilities.cpp" />
+    <ClCompile Include="shadow_vmt.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.hpp" />
     <ClInclude Include="utilities.hpp" />
+    <ClInclude Include="shadow_vmt.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,7 +1,14 @@
 #include <Windows.h>
 
+#include "console.hpp"
+
 DWORD WINAPI initialize(void* instance)
 {
+#ifdef _DEBUG
+	console::initialize(L"counterstrike2 debug");
+#endif 
+
+
 	FreeLibraryAndExitThread(static_cast<HMODULE>(instance), 0);
 
 	return TRUE;
@@ -9,6 +16,10 @@ DWORD WINAPI initialize(void* instance)
 
 DWORD WINAPI release()
 {
+#ifdef _DEBUG
+	console::release();
+#endif 
+
 	return TRUE;
 }
 

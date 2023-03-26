@@ -94,6 +94,8 @@ dkms.conf
 mono_crash.*
 
 # Build results
+build/
+intermediate/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/

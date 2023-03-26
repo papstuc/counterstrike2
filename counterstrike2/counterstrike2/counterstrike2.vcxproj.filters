@@ -27,6 +27,9 @@
     <ClCompile Include="shadow_vmt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source2-sdk\interfaces\interfaces.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.hpp">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="shadow_vmt.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source2-sdk\interfaces\interfaces.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

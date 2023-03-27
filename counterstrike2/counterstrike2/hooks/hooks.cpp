@@ -10,18 +10,15 @@
 
 static hooks::createmove::function_t createmove_original = nullptr;
 
-template <typename T = void*>
-inline T get_virtual(std::uint32_t uIndex, void* class_pointer)
+static void* get_virtual(void* class_pointer, std::uint32_t index)
 {
 	void** vtable = *static_cast<void***>(class_pointer);
-	return reinterpret_cast<T>(vtable[uIndex]);
+	return vtable[index];
 }
 
 bool hooks::initialize()
 {
-	//std::uint8_t* createmove_target = utilities::pattern_scan(L"client.dll", "48 8B C4 48 89 58 ? 48 89 48 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D A8");
-
-	std::uint8_t* createmove_target = get_virtual<std::uint8_t*>(5, interfaces::csgo_input);
+	void* createmove_target = get_virtual(interfaces::csgo_input, csgo_input_vtable::CREATEMOVE);
 
 	if (MH_Initialize() != MH_OK)
 	{
@@ -44,6 +41,12 @@ bool hooks::initialize()
 	debug::log(L"[+] hooks initialized\n");
 
 	return true;
+}
+
+void hooks::release()
+{
+	MH_Uninitialize();
+	MH_DisableHook(MH_ALL_HOOKS);
 }
 
 std::byte* __fastcall hooks::createmove::hook(void* csgoinput, unsigned int a2, unsigned __int8 a3)

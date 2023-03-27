@@ -12,9 +12,14 @@ DWORD WINAPI initialize(void* instance)
 	debug::initialize(L"counterstrike2 debug");
 #endif
 
-	interfaces::initialize();
-	hooks::initialize();
-	
+	debug::log(L"[!] initializing\n");
+	if (!interfaces::initialize() || !hooks::initialize())
+	{
+		MessageBox(nullptr, L"failed to initialize!", L"counterstrike2 error", MB_OK | MB_ICONERROR);
+		FreeLibraryAndExitThread(static_cast<HMODULE>(instance), 0);
+		return FALSE;
+	}
+
 	while (!GetAsyncKeyState(VK_END))
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(50));
@@ -28,9 +33,11 @@ DWORD WINAPI initialize(void* instance)
 
 DWORD WINAPI release()
 {
+	hooks::release();
+
 #ifdef _DEBUG
 	debug::release();
-#endif 
+#endif
 
 	return TRUE;
 }

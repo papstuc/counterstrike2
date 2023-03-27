@@ -7,6 +7,7 @@
 namespace hooks
 {
 	bool initialize();
+	void release();
 
 	namespace createmove
 	{

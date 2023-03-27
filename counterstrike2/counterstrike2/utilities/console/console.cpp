@@ -1,8 +1,8 @@
-#include "console.hpp"
-
 #include <Windows.h>
 #include <cstdarg>
 #include <cstdio>
+
+#include "console.hpp"
 
 void console::console_color_msg(color_t color, const char* message ...)
 {

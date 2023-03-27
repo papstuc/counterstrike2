@@ -18,8 +18,10 @@ private:
 
 public:
 	shadow_vmt(std::uint8_t* table);
+	shadow_vmt();
 	~shadow_vmt();
 
+	void initialize(std::uint8_t* table);
 	void* detour(std::size_t index, void* function);
 	void release();
 };

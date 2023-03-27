@@ -1,13 +1,24 @@
 #include <Windows.h>
+#include <chrono>
+#include <thread>
 
-#include "console.hpp"
+#include "source2-sdk/interfaces/interfaces.hpp"
+#include "utilities/debug/debug.hpp"
+#include "hooks/hooks.hpp"
 
 DWORD WINAPI initialize(void* instance)
 {
 #ifdef _DEBUG
-	console::initialize(L"counterstrike2 debug");
+	debug::initialize(L"counterstrike2 debug");
 #endif
+	hooks::initialize();
+	
+	while (!GetAsyncKeyState(VK_END))
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(50));
+	}
 
+	std::this_thread::sleep_for(std::chrono::milliseconds(250));
 	FreeLibraryAndExitThread(static_cast<HMODULE>(instance), 0);
 
 	return TRUE;
@@ -16,7 +27,7 @@ DWORD WINAPI initialize(void* instance)
 DWORD WINAPI release()
 {
 #ifdef _DEBUG
-	console::release();
+	debug::release();
 #endif 
 
 	return TRUE;

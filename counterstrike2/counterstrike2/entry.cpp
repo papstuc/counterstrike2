@@ -11,6 +11,8 @@ DWORD WINAPI initialize(void* instance)
 #ifdef _DEBUG
 	debug::initialize(L"counterstrike2 debug");
 #endif
+
+	interfaces::initialize();
 	hooks::initialize();
 	
 	while (!GetAsyncKeyState(VK_END))

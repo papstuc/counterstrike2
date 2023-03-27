@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-class global_vars_t
+class i_global_vars_t
 {
 public:
     float realtime;
@@ -22,4 +22,4 @@ public:
     char* current_mapname;
 };
 
-static_assert(sizeof(global_vars_t) == 0x0190, "global_vars_t has wrong size");
+static_assert(sizeof(i_global_vars_t) == 0x0190, "global_vars_t has wrong size");

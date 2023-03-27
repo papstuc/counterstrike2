@@ -65,7 +65,7 @@
     <ClInclude Include="source2-sdk\interfaces\interfaces.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source2-sdk\interfaces\global_vars.hpp">
+    <ClInclude Include="source2-sdk\interfaces\i_global_vars.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="utilities\structs\color_t.hpp">
@@ -99,6 +99,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="utilities\minhook\trampoline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source2-sdk\interfaces\i_csgo_input.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

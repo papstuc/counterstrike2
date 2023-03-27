@@ -84,3 +84,9 @@ std::uint8_t* utilities::resolve_rip(std::uint8_t* address, std::uint32_t rva_of
 
 	return reinterpret_cast<std::uint8_t*>(rva + rip);
 }
+
+void* utilities::get_virtual(void* class_pointer, std::uint32_t index)
+{
+	void** vtable = *static_cast<void***>(class_pointer);
+	return vtable[index];
+}

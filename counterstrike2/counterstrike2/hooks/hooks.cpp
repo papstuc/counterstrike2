@@ -1,8 +1,6 @@
 #include "hooks.hpp"
 
 #include "../utilities/minhook/MinHook.h"
-
-#include "../utilities/shadow_vmt/shadow_vmt.hpp"
 #include "../utilities/utilities.hpp"
 #include "../utilities/debug/debug.hpp"
 
@@ -10,15 +8,9 @@
 
 static hooks::createmove::function_t createmove_original = nullptr;
 
-static void* get_virtual(void* class_pointer, std::uint32_t index)
-{
-	void** vtable = *static_cast<void***>(class_pointer);
-	return vtable[index];
-}
-
 bool hooks::initialize()
 {
-	void* createmove_target = get_virtual(interfaces::csgo_input, csgo_input_vtable::CREATEMOVE);
+	void* createmove_target = utilities::get_virtual(interfaces::csgo_input, csgo_input_vtable::CREATEMOVE);
 
 	if (MH_Initialize() != MH_OK)
 	{

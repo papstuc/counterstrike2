@@ -2,7 +2,7 @@
 
 #include "../utilities/minhook/MinHook.h"
 #include "../utilities/utilities.hpp"
-#include "../utilities/debug/debug.hpp"
+#include "../utilities/debug_console/debug.hpp"
 
 #include "../source2-sdk/interfaces/interfaces.hpp"
 

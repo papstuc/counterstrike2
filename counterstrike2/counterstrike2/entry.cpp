@@ -3,7 +3,8 @@
 #include <thread>
 
 #include "source2-sdk/interfaces/interfaces.hpp"
-#include "utilities/debug/debug.hpp"
+#include "source2-sdk/schema_system/schema_system.hpp"
+#include "utilities/debug_console/debug.hpp"
 #include "hooks/hooks.hpp"
 
 DWORD WINAPI initialize(void* instance)
@@ -13,7 +14,7 @@ DWORD WINAPI initialize(void* instance)
 #endif
 
 	debug::log(L"[!] initializing\n");
-	if (!interfaces::initialize() || !hooks::initialize())
+	if (!interfaces::initialize() || !hooks::initialize() || !schema_system::initialize())
 	{
 		MessageBox(nullptr, L"failed to initialize!", L"counterstrike2 error", MB_OK | MB_ICONERROR);
 		FreeLibraryAndExitThread(static_cast<HMODULE>(instance), 0);

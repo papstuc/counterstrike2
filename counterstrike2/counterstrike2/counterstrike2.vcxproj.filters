@@ -18,7 +18,7 @@
     <ClCompile Include="entry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utilities\debug\debug.cpp">
+    <ClCompile Include="utilities\debug_console\debug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="utilities\utilities.cpp">
@@ -51,9 +51,12 @@
     <ClCompile Include="utilities\minhook\trampoline.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source2-sdk\schema_system\schema_system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="utilities\debug\debug.hpp">
+    <ClInclude Include="utilities\debug_console\debug.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="utilities\utilities.hpp">
@@ -65,7 +68,7 @@
     <ClInclude Include="source2-sdk\interfaces\interfaces.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source2-sdk\interfaces\i_global_vars.hpp">
+    <ClInclude Include="source2-sdk\classes\global_vars.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="utilities\structs\color_t.hpp">
@@ -102,6 +105,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source2-sdk\interfaces\i_csgo_input.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utilities\debug\debug.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source2-sdk\classes\entity_t.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source2-sdk\interfaces\i_engine_client.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source2-sdk\interfaces\i_schema_system.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source2-sdk\schema_system\schema_system.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

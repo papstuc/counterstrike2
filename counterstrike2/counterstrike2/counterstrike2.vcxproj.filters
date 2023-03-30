@@ -54,6 +54,12 @@
     <ClCompile Include="source2-sdk\schema_system\schema_system.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source2-sdk\math\vec3_t.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source2-sdk\sdk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utilities\debug_console\debug.hpp">
@@ -110,7 +116,7 @@
     <ClInclude Include="utilities\debug\debug.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source2-sdk\classes\entity_t.hpp">
+    <ClInclude Include="source2-sdk\classes\entities.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source2-sdk\interfaces\i_engine_client.hpp">
@@ -120,6 +126,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source2-sdk\schema_system\schema_system.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source2-sdk\math\vec3_t.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source2-sdk\sdk.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

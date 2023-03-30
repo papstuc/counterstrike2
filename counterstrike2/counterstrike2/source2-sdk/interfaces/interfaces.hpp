@@ -9,7 +9,7 @@ namespace interfaces
 {
 	extern global_vars_t* global_vars;
 	extern i_csgo_input* csgo_input;
-	extern i_engine_client* engine_client;
+	extern i_engine_client* engine;
 	extern i_schema_system* schema_system;
 
 	bool initialize();

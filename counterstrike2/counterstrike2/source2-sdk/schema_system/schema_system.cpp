@@ -33,7 +33,7 @@ bool schema_system::initialize()
 			{
 				schema_class_field_data_t* field = &client_class_info->fields[j];
 
-				if (!field)
+				if (!binding->binary_name || !field || !field->name)
 				{
 					continue;
 				}
@@ -52,3 +52,4 @@ std::uint32_t schema_system::get_schema(std::string class_name, std::string prop
 {
 	return schema_data[class_name][property_name].offset;
 }
+

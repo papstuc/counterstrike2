@@ -238,6 +238,7 @@ typedef struct _schema_class_field_data_t
 	const char* name;
 	schema_type* type;
 	short offset;
+	unsigned char pad1[0xE];
 } schema_class_field_data_t;
 
 typedef struct _schema_class_info_data_t
@@ -292,6 +293,7 @@ private:
 	std::array<char, 256> m_name = { };
 	unsigned char pad2[0x450];
 	c_utl_ts_hash<schema_class_binding_t*> m_classes;
+	unsigned char pad3[0x2804];
 };
 
 class i_schema_system

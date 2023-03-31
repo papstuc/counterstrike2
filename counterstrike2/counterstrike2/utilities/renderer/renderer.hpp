@@ -1,6 +1,5 @@
 #pragma once
 
-#include <cstdint>
 #include "../../source2-sdk/math/color_t.hpp"
 
 namespace renderer

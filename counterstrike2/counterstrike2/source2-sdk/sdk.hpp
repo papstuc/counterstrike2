@@ -17,10 +17,10 @@
 namespace sdk
 {
 	extern player_t* local_player;
-    extern std::int32_t screen_width;
-    extern std::int32_t screen_height;
+	extern std::int32_t screen_width;
+	extern std::int32_t screen_height;
 
-    void* get_entity_index(int index);
-    void* get_player_pawn(void* entity);
-    void* get_player_pawn_handle(std::uint16_t handle);
+	void* get_entity_index(int index);
+	void* get_player_pawn(void* entity);
+	void* get_player_pawn_handle(std::uint16_t handle);
 }

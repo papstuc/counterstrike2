@@ -150,17 +150,12 @@ HRESULT __fastcall hooks::swap_chain_present::hook(IDXGISwapChain* swap_chain, s
 		sdk::screen_width = width;
 	}
 
-	//menu::render(context, render_view);
-
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
 	visuals::run_player_esp();
 
-	renderer::rect(200, 200, 300, 300, color_t::blue());
-	//g_visuals.run();
-	//g_menu.render();
 	ImGui::Render();
 
 	context->OMSetRenderTargets(1, &render_view, nullptr);

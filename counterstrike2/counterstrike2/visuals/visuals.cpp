@@ -130,7 +130,7 @@ void visuals::run_player_esp()
     
     box_t box = { };
 
-    for (std::int32_t i = 0; i < interfaces::globals->maxclients; i++)
+    for (std::uint32_t i = 0; i < interfaces::globals->maxclients; i++)
     {
         controller_t* controller = interfaces::entity_list->get_controller_by_index(i);
 

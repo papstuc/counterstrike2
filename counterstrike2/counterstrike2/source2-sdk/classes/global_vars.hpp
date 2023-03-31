@@ -8,7 +8,7 @@ public:
     float realtime;
     std::int32_t framecount;
     unsigned char pad1[0x8];
-    std::int32_t maxclients;
+    std::uint32_t maxclients;
     float intervalpertick;
     unsigned char pad2[0x12];
     float curtime;

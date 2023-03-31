@@ -76,7 +76,6 @@ bool hooks::initialize()
 	}
 
 	debug::log(L"[+] hooks initialized\n");
-
 	return true;
 }
 

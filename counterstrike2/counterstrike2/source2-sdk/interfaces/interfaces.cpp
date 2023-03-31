@@ -69,6 +69,12 @@ bool interfaces::initialize()
 	interfaces::schema_system = get_interface<i_schema_system>(L"schemasystem.dll", "SchemaSystem_001");
 	interfaces::entity_list = *reinterpret_cast<i_entity_list**>(utilities::resolve_rip(utilities::pattern_scan(L"client.dll", "48 8B 0D ? ? ? ? 8B D3 E8 ? ? ? ? 48 8B F0"), 3, 7));
 
+	if (!interfaces::globals || !interfaces::csgo_input || !interfaces::render || !interfaces::engine || !interfaces::schema_system || !interfaces::entity_list)
+	{
+		debug::log("[-] failed to initialize interfaces\n");
+		return false;
+	}
+
 	debug::log("[+] interfaces initialized\n");
 	return true;
 }

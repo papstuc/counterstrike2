@@ -45,6 +45,13 @@ bool schema_system::initialize()
 		}
 	}
 
+	if (schema_data.size() == 0)
+	{
+		debug::log(L"[-] failed to initialize schema system\n");
+		return false;
+	}
+
+	debug::log("[+] schema system initialized\n");
 	return true;
 }
 

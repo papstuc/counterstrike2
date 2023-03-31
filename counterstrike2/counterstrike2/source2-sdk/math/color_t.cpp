@@ -60,5 +60,5 @@ color_t color_t::blue(std::uint8_t a)
 
 color_t color_t::yellow(std::uint8_t a)
 {
-	return  { 247, 202, 24, a };
+	return { 247, 202, 24, a };
 }

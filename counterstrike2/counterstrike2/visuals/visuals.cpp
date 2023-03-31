@@ -1,4 +1,5 @@
 #include <array>
+#include <algorithm>
 #include "visuals.hpp"
 
 #include "../utilities/utilities.hpp"
@@ -80,6 +81,42 @@ static bool get_bounding_box(player_t* player, box_t& box)
     return true;
 }
 
+static void draw_box(box_t& box)
+{
+    renderer::rect(box.x - 1, box.y - 1, box.w + 2, box.h + 2, color_t::black());
+    renderer::rect(box.x + 1, box.y + 1, box.w - 2, box.h - 2, color_t::black());
+    renderer::rect(box.x, box.y, box.w, box.h, color_t::white());
+}
+
+static void draw_health(box_t& box, std::int32_t player_health)
+{
+    float bar_height = player_health * box.h / 100.f;
+    std::uint8_t color_scale = static_cast<std::uint8_t>(player_health * 2.55);
+
+    box_t bar_box = { box.x - 5.f, box.y, 3.f, box.h };
+    box_t health_bar = { box.x - 4.f, box.y + box.h - bar_height, 1.f, bar_height};
+
+    renderer::filled_rect(bar_box.x, bar_box.y, bar_box.w, bar_box.h, color_t::black());
+    renderer::filled_rect(health_bar.x, health_bar.y, health_bar.w, health_bar.h, color_t(255 - color_scale, color_scale, 0));
+}
+
+static void draw_name(box_t& box, const char* player_name)
+{
+    std::string name(player_name);
+
+    if (name.empty())
+    {
+        return;
+    }
+
+    if (name.size() > 15)
+    {
+        name = name.substr(0, 15) + "...";
+    }
+
+    renderer::text(box.x + (box.w / 2.f), box.y - 13, color_t::white(), name.c_str(), true);
+}
+
 void visuals::run_player_esp()
 {
     if (!interfaces::engine->is_connected() || !interfaces::engine->is_in_game())
@@ -87,28 +124,41 @@ void visuals::run_player_esp()
         return;
     }
 
-    for (std::int32_t i = 1; i <= interfaces::globals->maxclients; i++)
+    if (!sdk::local_player || !sdk::local_player->is_alive())
     {
-        void* entity = sdk::get_entity_index(i);
+        return;
+    }
 
-        if (!entity)
+    for (std::int32_t i = 0; i < interfaces::globals->maxclients; i++)
+    {
+        controller_t* controller = interfaces::entity_list->get_controller_by_index(i);
+
+        if (!controller)
         {
             continue;
         }
 
-        player_t* player = reinterpret_cast<player_t*>(sdk::get_player_pawn(entity));
+        player_t* player = interfaces::entity_list->get_player_from_controller(controller);
 
-        if (!player || !player->is_alive())
+        if (!player)
+        {
+            continue;
+        }
+
+        if (!player || !player->is_alive() || player->team() == sdk::local_player->team())
         {
             continue;
         }
 
         box_t box = { };
+
         if (!get_bounding_box(player, box))
         {
             continue;
         }
 
-        renderer::rect(box.x, box.y, box.w, box.h, color_t::red());
+        draw_box(box);
+        draw_health(box, player->health());
+        draw_name(box, controller->name());
     }
 }

@@ -16,3 +16,8 @@ vec2_t::~vec2_t()
 {
 
 }
+
+vec2_t vec2_t::operator+(vec2_t& other)
+{
+	return vec2_t(x + other.x, y + other.y);
+}

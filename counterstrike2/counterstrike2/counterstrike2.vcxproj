@@ -117,6 +117,7 @@
     <ClInclude Include="source2-sdk\classes\entities.hpp" />
     <ClInclude Include="source2-sdk\interfaces\i_csgo_input.hpp" />
     <ClInclude Include="source2-sdk\interfaces\i_engine_client.hpp" />
+    <ClInclude Include="source2-sdk\interfaces\i_entity_list.hpp" />
     <ClInclude Include="source2-sdk\interfaces\i_render.hpp" />
     <ClInclude Include="source2-sdk\interfaces\i_schema_system.hpp" />
     <ClInclude Include="source2-sdk\math\color_t.hpp" />

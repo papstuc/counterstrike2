@@ -212,5 +212,8 @@
     <ClInclude Include="source2-sdk\math\point_t.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source2-sdk\interfaces\i_entity_list.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

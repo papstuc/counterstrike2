@@ -9,4 +9,6 @@ public:
 	vec2_t();
 	vec2_t(float x, float y);
 	~vec2_t();
+
+	vec2_t operator+(vec2_t& other);
 };

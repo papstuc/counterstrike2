@@ -11,6 +11,7 @@
 #include "math/color_t.hpp"
 #include "math/vec2_t.hpp"
 #include "math/vec3_t.hpp"
+#include "math/point_t.hpp"
 
 #include "schema_system/schema_system.hpp"
 

@@ -5,6 +5,7 @@
 #include "i_engine_client.hpp"
 #include "i_schema_system.hpp"
 #include "i_render.hpp"
+#include "i_entity_list.hpp"
 
 namespace interfaces
 {
@@ -13,6 +14,7 @@ namespace interfaces
 	extern i_render* render;
 	extern i_engine_client* engine;
 	extern i_schema_system* schema_system;
+	extern i_entity_list* entity_list;
 
 	bool initialize();
 }

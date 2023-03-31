@@ -14,8 +14,8 @@ static bool get_bounding_box(player_t* player, box_t& box)
 {
     vec3_t origin = player->game_scene_node()->abs_origin();
 
-    vec3_t flb, brt, blb, frt, frb, brb, blt, flt;
-    float left, top, right, bottom;
+    vec3_t flb, brt, blb, frt, frb, brb, blt, flt = { };
+    float left, top, right, bottom = 0.f;
 
     vec3_t min = player->collision_property()->mins() + origin;
     vec3_t max = player->collision_property()->maxs() + origin;
@@ -76,7 +76,6 @@ static bool get_bounding_box(player_t* player, box_t& box)
     box.y = top;
     box.w = right - left;
     box.h = bottom - top;
-
 
     return true;
 }

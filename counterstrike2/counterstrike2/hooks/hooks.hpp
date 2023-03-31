@@ -26,4 +26,16 @@ namespace hooks
 		using function_t = std::int64_t(__fastcall*)(std::int64_t, std::int32_t);
 		std::int64_t __fastcall hook(std::int64_t a1, std::int32_t a2);
 	}
+
+	namespace swap_chain_present
+	{
+		using function_t = HRESULT(__fastcall*)(IDXGISwapChain*, std::uint32_t, std::uint32_t);
+		HRESULT __fastcall hook(IDXGISwapChain* swap_chain, std::uint32_t sync_interval, std::uint32_t flags);
+	}
+
+	namespace swap_chain_resize_buffers
+	{
+		using function_t = HRESULT(__fastcall*)(IDXGISwapChain*, std::uint32_t, std::uint32_t, std::uint32_t, DXGI_FORMAT, std::uint32_t);
+		HRESULT __fastcall hook(IDXGISwapChain* swap_chain, std::uint32_t buffer_count, std::uint32_t width, std::uint32_t height, DXGI_FORMAT new_format, std::uint32_t swap_chain_flags);
+	}
 }

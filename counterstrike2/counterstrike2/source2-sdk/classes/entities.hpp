@@ -93,6 +93,33 @@ public:
     SCHEMA("CCollisionProperty", "m_vecMaxs", maxs, vec3_t);
 };
 
+class econ_item_view_t
+{
+public:
+    SCHEMA("CEconItemView", "m_iItemIDHigh", item_id_high, std::int32_t);
+};
+
+class attribute_container_t
+{
+public:
+    SCHEMA("CAttributeContainer", "m_Item", item, econ_item_view_t*);
+};
+
+class econ_entity_t
+{
+public:
+    SCHEMA("CEconEntity", "m_flFallbackWear", fallback_wear, float);
+    SCHEMA("CEconEntity", "m_nFallbackSeed", attribute_manager, attribute_container_t*);
+    SCHEMA("CEconEntity", "m_nFallbackSeed", fallback_seed, std::int32_t);
+    SCHEMA("CEconEntity", "m_nFallbackPaintKit", fallback_paintkit, std::int32_t);
+};
+
+class weapon_services_t
+{
+public:
+    SCHEMA("CPlayer_WeaponServices", "m_hMyWeapons", weapons, econ_entity_t*);
+};
+
 class entity_t
 {
 public:
@@ -101,50 +128,18 @@ public:
 
     SCHEMA("C_BaseEntity", "m_hOwnerEntity", owner_handle, unsigned long);
     SCHEMA("C_BaseEntity", "m_flSimulationTime", simulation_time, float);
-
-    SCHEMA("C_BaseEntity", "m_lifeState", life_state, std::int32_t);
-};
-
-class weapon_services_t
-{
-public:
-    std::uint32_t* get_weapons()
-    {
-        return reinterpret_cast<std::uint32_t*>(reinterpret_cast<std::uint64_t>(this) + schema_system::get_schema("CPlayer_WeaponServices", "m_hMyWeapons"));
-    }
-};
-
-class econ_entity_t
-{
-public:
-    SCHEMA("C_EconEntity", "m_OriginalOwnerXuidLow", original_owner_xuid_low, std::int32_t);
-    SCHEMA("C_EconEntity", "m_OriginalOwnerXuidHigh", original_owner_xuid_high, std::int32_t);
-    SCHEMA("C_EconEntity", "m_nFallbackStatTrak", fallback_stattrak, std::int32_t);
-    SCHEMA("C_EconEntity", "m_nFallbackPaintKit", fallback_paint_kit, std::int32_t);
-    SCHEMA("C_EconEntity", "m_nFallbackSeed", fallback_seed, std::int32_t);
-    //SCHEMA("DT_BaseAttributableItem", "m_iEntityQuality", entity_quality, std::int32_t);
-    SCHEMA("C_EconEntity", "m_flFallbackWear", fallback_wear, float);
-    //SCHEMA("DT_BaseCombatWeapon", "m_hWeaponWorldModel", world_model_handle, unsigned long);
-    //SCHEMA("DT_BaseAttributableItem", "m_iItemDefinitionIndex", item_definition_index, short);
-    //SCHEMA("DT_BaseAttributableItem", "m_iItemIDHigh", item_id_high, std::int32_t);
-    SCHEMA("C_EconItemView", "m_iItemIDHigh", item_id_high, std::int32_t);
-};
-
-class weapon_base_t : public econ_entity_t
-{
-    // [C_WeaponCSBase] -> m_nViewModelIndex
 };
 
 class player_t : public entity_t
 {
 public:
     SCHEMA("C_BasePlayerPawn", "m_pWeaponServices", weapon_services, weapon_services_t*);
-
     SCHEMA("CCSPlayer_ItemServices", "m_bHasDefuser", has_defuser, bool);
     SCHEMA("C_CSPlayerPawnBase", "m_bGunGameImmunity", has_gun_immunity, bool);
+    SCHEMA("C_BaseEntity", "m_iHealth", health, std::int32_t);
 
     bool is_alive()
     {
-        return this->life_state() == 0;
+        return this->health() > 0;
     }
 };

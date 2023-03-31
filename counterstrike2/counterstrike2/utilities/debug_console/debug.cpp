@@ -1,7 +1,8 @@
+#include "debug.hpp"
+
 #include <Windows.h>
 #include <cstdio>
 
-#include "debug.hpp"
 
 void debug::initialize(const wchar_t* console_title)
 {

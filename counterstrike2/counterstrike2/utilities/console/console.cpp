@@ -1,12 +1,13 @@
+#include "console.hpp"
+
 #include <Windows.h>
 #include <cstdarg>
 #include <cstdio>
 
-#include "console.hpp"
 
 void console::console_color_msg(color_t color, const char* message ...)
 {
-    using function_t = void(__cdecl*)(const color_t&, const char*);
+    using function_t = void(__cdecl*)(color_t&, const char*);
     static function_t p_console_color_msg = reinterpret_cast<decltype(p_console_color_msg)>(GetProcAddress(GetModuleHandle(L"tier0.dll"), "?ConColorMsg@@YAXAEBVColor@@PEBDZZ"));
 
     if (!p_console_color_msg)

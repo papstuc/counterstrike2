@@ -10,4 +10,6 @@ public:
 	vec3_t();
 	vec3_t(float x, float y, float z);
 	~vec3_t();
+
+	vec3_t operator+(vec3_t& other);
 };

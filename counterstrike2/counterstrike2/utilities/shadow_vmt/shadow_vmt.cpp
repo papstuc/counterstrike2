@@ -1,6 +1,6 @@
-#include <Windows.h>
-
 #include "shadow_vmt.hpp"
+
+#include <Windows.h>
 
 shadow_vmt::shadow_vmt(std::uint8_t* table)
 {

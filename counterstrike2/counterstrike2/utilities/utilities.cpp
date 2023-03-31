@@ -1,7 +1,7 @@
+#include "utilities.hpp"
+
 #include <vector>
 #include <Windows.h>
-
-#include "utilities.hpp"
 
 static std::vector<std::uint32_t> pattern_to_byte(const char* pattern)
 {

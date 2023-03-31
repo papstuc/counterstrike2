@@ -1,11 +1,12 @@
-#include <Windows.h>
-
 #include "interfaces.hpp"
 #include "../../utilities/utilities.hpp"
 #include "../../utilities/debug_console/debug.hpp"
 
-global_vars_t* interfaces::global_vars = nullptr;
+#include <Windows.h>
+
+global_vars_t* interfaces::globals = nullptr;
 i_csgo_input* interfaces::csgo_input = nullptr;
+i_render* interfaces::render = nullptr;
 i_engine_client* interfaces::engine = nullptr;
 i_schema_system* interfaces::schema_system = nullptr;
 
@@ -60,8 +61,9 @@ static T* get_interface(const wchar_t* module_name, const char* interface_name)
 
 bool interfaces::initialize()
 {
-	interfaces::global_vars = *reinterpret_cast<global_vars_t**>(utilities::resolve_rip(utilities::pattern_scan(L"client.dll", "48 8B 05 ? ? ? ? 4C 8D 0D ? ? ? ? F2 0F 11 74 24 ? 4C 8D 05 ? ? ? ? BA"), 3, 7));
+	interfaces::globals = *reinterpret_cast<global_vars_t**>(utilities::resolve_rip(utilities::pattern_scan(L"client.dll", "48 8B 05 ? ? ? ? 4C 8D 0D ? ? ? ? F2 0F 11 74 24 ? 4C 8D 05 ? ? ? ? BA"), 3, 7));
 	interfaces::csgo_input = *reinterpret_cast<i_csgo_input**>(utilities::resolve_rip(utilities::pattern_scan(L"client.dll", "48 8B 0D ? ? ? ? 4C 8D 8F ? ? ? ? 33 ED"), 3, 7));
+	interfaces::render = **reinterpret_cast<i_render***>(utilities::resolve_rip(utilities::pattern_scan(L"rendersystemdx11.dll", "66 0F 7F 05 ? ? ? ? 66 0F 7F 0D ? ? ? ? 48 89 35"), 4, 8));
 	interfaces::engine = get_interface<i_engine_client>(L"engine2.dll", "Source2EngineToClient001");
 	interfaces::schema_system = get_interface<i_schema_system>(L"schemasystem.dll", "SchemaSystem_001");
 

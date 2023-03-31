@@ -18,3 +18,8 @@ vec3_t::~vec3_t()
 {
 
 }
+
+vec3_t vec3_t::operator+(vec3_t& other)
+{
+	return vec3_t(x + other.x, y + other.y, z + other.z);
+}

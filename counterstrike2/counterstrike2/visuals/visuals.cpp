@@ -127,6 +127,8 @@ void visuals::run_player_esp()
     {
         return;
     }
+    
+    box_t box = { };
 
     for (std::int32_t i = 0; i < interfaces::globals->maxclients; i++)
     {
@@ -148,8 +150,6 @@ void visuals::run_player_esp()
         {
             continue;
         }
-
-        box_t box = { };
 
         if (!get_bounding_box(player, box))
         {

@@ -120,16 +120,6 @@ public:
     SCHEMA("CPlayer_WeaponServices", "m_hMyWeapons", weapons, econ_entity_t*);
 };
 
-class player_t;
-class controller_t
-{
-public:
-    SCHEMA("CBasePlayerController", "m_steamID", steam_id, std::uint64_t);
-    SCHEMA("CBasePlayerController", "m_hPawn", pawn, player_t*);
-    SCHEMA("CBasePlayerController", "m_bIsLocalPlayerController", is_local_player_controller, bool);
-    SCHEMA("CCSPlayerController", "m_sSanitizedPlayerName", name, const char*);
-};
-
 class entity_t
 {
 public:
@@ -144,7 +134,6 @@ class player_t : public entity_t
 {
 public:
     SCHEMA("C_BasePlayerPawn", "m_pWeaponServices", weapon_services, weapon_services_t*);
-    SCHEMA("C_BasePlayerPawn", "m_hController", controller, controller_t*);
     SCHEMA("CCSPlayer_ItemServices", "m_bHasDefuser", has_defuser, bool);
     SCHEMA("C_CSPlayerPawnBase", "m_bGunGameImmunity", has_gun_immunity, bool);
     SCHEMA("C_BaseEntity", "m_iHealth", health, std::int32_t);
@@ -154,4 +143,13 @@ public:
     {
         return this->health() > 0;
     }
+};
+
+class controller_t
+{
+public:
+    SCHEMA("CBasePlayerController", "m_steamID", steam_id, std::uint64_t);
+    SCHEMA("CBasePlayerController", "m_hPawn", pawn, player_t*);
+    SCHEMA("CBasePlayerController", "m_bIsLocalPlayerController", is_local_player_controller, bool);
+    SCHEMA("CCSPlayerController", "m_sSanitizedPlayerName", name, const char*);
 };

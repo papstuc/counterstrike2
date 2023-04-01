@@ -84,6 +84,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="combat\combat.cpp" />
     <ClCompile Include="config\config.cpp" />
     <ClCompile Include="hooks\hooks.cpp" />
     <ClCompile Include="menu\menu.cpp" />
@@ -115,6 +116,7 @@
     <ClCompile Include="visuals\visuals.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="combat\combat.hpp" />
     <ClInclude Include="config\config.hpp" />
     <ClInclude Include="hooks\hooks.hpp" />
     <ClInclude Include="menu\menu.hpp" />

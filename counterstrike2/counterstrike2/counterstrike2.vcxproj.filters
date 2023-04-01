@@ -102,6 +102,9 @@
     <ClCompile Include="source2-sdk\sdl\sdl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="combat\combat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utilities\debug_console\debug.hpp">
@@ -237,6 +240,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source2-sdk\interfaces\i_client.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="combat\combat.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

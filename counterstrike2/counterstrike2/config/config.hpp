@@ -13,6 +13,8 @@ namespace config
 		bool draw_box = false;
 		bool draw_name = false;
 		bool draw_health = false;
+
+		bool aimbot = false;
 	} config_t;
 
 	typedef struct _file_t

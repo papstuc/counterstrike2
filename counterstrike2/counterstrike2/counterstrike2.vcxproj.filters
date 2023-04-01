@@ -236,5 +236,8 @@
     <ClInclude Include="source2-sdk\sdl\sdl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source2-sdk\interfaces\i_client.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

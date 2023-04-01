@@ -6,6 +6,7 @@
 
 #include <Windows.h>
 
+i_client* interfaces::client = nullptr;
 i_csgo_input* interfaces::csgo_input = nullptr;
 i_engine_client* interfaces::engine = nullptr;
 i_entity_list* interfaces::entity_list = nullptr;
@@ -65,6 +66,7 @@ static T* get_interface(const wchar_t* module_name, const char* interface_name)
 
 bool interfaces::initialize()
 {
+	interfaces::client = get_interface<i_client>(L"client.dll", "Source2Client002");
 	interfaces::csgo_input = *reinterpret_cast<i_csgo_input**>(utilities::resolve_rip(utilities::pattern_scan(L"client.dll", CSGO_INPUT), 3, 7));
 	interfaces::engine = get_interface<i_engine_client>(L"engine2.dll", "Source2EngineToClient001");
 	interfaces::entity_list = *reinterpret_cast<i_entity_list**>(utilities::resolve_rip(utilities::pattern_scan(L"client.dll", ENTITY_LIST), 3, 7));

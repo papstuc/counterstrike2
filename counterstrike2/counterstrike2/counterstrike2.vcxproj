@@ -121,6 +121,7 @@
     <ClInclude Include="signatures.hpp" />
     <ClInclude Include="source2-sdk\classes\entities.hpp" />
     <ClInclude Include="source2-sdk\classes\user_cmd.hpp" />
+    <ClInclude Include="source2-sdk\interfaces\i_client.hpp" />
     <ClInclude Include="source2-sdk\interfaces\i_csgo_input.hpp" />
     <ClInclude Include="source2-sdk\interfaces\i_engine_client.hpp" />
     <ClInclude Include="source2-sdk\interfaces\i_entity_list.hpp" />

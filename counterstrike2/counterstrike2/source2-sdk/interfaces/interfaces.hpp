@@ -1,5 +1,6 @@
 #pragma once
 
+#include "i_client.hpp"
 #include "i_csgo_input.hpp"
 #include "i_engine_client.hpp"
 #include "i_entity_list.hpp"
@@ -10,6 +11,7 @@
 
 namespace interfaces
 {
+	extern i_client* client;
 	extern i_csgo_input* csgo_input;
 	extern i_engine_client* engine;
 	extern i_entity_list* entity_list;

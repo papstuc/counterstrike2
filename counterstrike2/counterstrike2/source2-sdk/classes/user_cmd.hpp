@@ -18,7 +18,7 @@ class user_cmd_base_t
 {
 public:
     char pad1[0x40];
-    cmd_qangle_t* viewangles;
+    cmd_qangle_t* view_angles;
     char pad2[0x3F8];
 };
 

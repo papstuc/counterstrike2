@@ -123,6 +123,7 @@ bool __fastcall hooks::create_move::hook(void* a1, std::uint32_t a2, std::uint8_
 
 	user_cmd_t* user_cmd = interfaces::csgo_input->get_user_cmd(a1, a2);
 
+	interfaces::client->set_view_angles({ 180, 0, 0 });
 	sdk::update_local_player();
 
 	return false;

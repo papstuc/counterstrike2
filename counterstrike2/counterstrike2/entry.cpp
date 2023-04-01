@@ -2,6 +2,7 @@
 #include "source2-sdk/schema_system/schema_system.hpp"
 #include "utilities/debug_console/debug.hpp"
 #include "hooks/hooks.hpp"
+#include "menu/menu.hpp"
 
 #include <chrono>
 #include <thread>
@@ -25,7 +26,10 @@ DWORD WINAPI initialize(void* instance)
 		std::this_thread::sleep_for(std::chrono::milliseconds(50));
 	}
 
+	menu::open = false;
+
 	std::this_thread::sleep_for(std::chrono::milliseconds(250));
+
 	FreeLibraryAndExitThread(static_cast<HMODULE>(instance), 0);
 
 	return TRUE;

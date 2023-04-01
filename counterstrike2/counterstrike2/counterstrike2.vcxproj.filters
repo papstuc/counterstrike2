@@ -93,7 +93,13 @@
     <ClCompile Include="source2-sdk\math\color_t.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source2-sdk\math\point_t.cpp">
+    <ClCompile Include="menu\menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="config\config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source2-sdk\sdl\sdl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -191,7 +197,7 @@
     <ClInclude Include="utilities\imgui\imstb_truetype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source2-sdk\interfaces\i_render.hpp">
+    <ClInclude Include="source2-sdk\interfaces\i_renderer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source2-sdk\math\math.hpp">
@@ -209,10 +215,25 @@
     <ClInclude Include="source2-sdk\math\color_t.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source2-sdk\math\point_t.hpp">
+    <ClInclude Include="source2-sdk\interfaces\i_entity_list.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source2-sdk\interfaces\i_entity_list.hpp">
+    <ClInclude Include="source2-sdk\classes\user_cmd.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="menu\menu.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="signatures.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config\config.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source2-sdk\interfaces\i_input_system.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source2-sdk\sdl\sdl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -10,7 +10,7 @@ enum render_vtable
     RESIZE_BUFFERS = 13
 };
 
-class i_render
+class i_renderer
 {
 public:
     unsigned char pad1[0x178];

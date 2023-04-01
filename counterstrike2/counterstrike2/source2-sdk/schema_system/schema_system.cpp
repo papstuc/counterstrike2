@@ -18,7 +18,7 @@ bool schema_system::initialize()
 			continue;
 		}
 
-		c_utl_ts_hash<schema_class_binding_t*> schema_classes = schema_class->get_classes();
+		utl_ts_hash<schema_class_binding_t*> schema_classes = schema_class->get_classes();
 
 		for (schema_class_binding_t* binding : schema_classes.get_elements())
 		{

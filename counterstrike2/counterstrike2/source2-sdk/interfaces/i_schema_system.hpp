@@ -4,7 +4,7 @@
 #include <array>
 #include <vector>
 
-class c_utl_memory_pool
+class utl_memory_pool
 {
 public:
 	std::int32_t block_size()
@@ -32,7 +32,7 @@ private:
 };
 
 template<class T, class key_type = std::uint64_t>
-class c_utl_ts_hash
+class utl_ts_hash
 {
 public:
 	static std::uint64_t invalid_handle()
@@ -95,7 +95,7 @@ public:
 
 	struct hash_struct_data_t
 	{
-		unsigned char pad_1[0x10];
+		char pad_1[0x10];
 		std::array<hash_fixed_struct_data, 256> m_list;
 	};
 
@@ -108,7 +108,7 @@ public:
 		}
 
 	private:
-		unsigned char pad_1[0x18];
+		char pad_1[0x18];
 		std::array<hash_fixed_data_t, 128> m_list;
 	};
 
@@ -139,7 +139,7 @@ public:
 		hash_unallocated_data_t* m_unallocated_data = nullptr;
 	};
 
-	c_utl_memory_pool m_entry_memory;
+	utl_memory_pool m_entry_memory;
 	hash_bucket_t m_buckets;
 	bool m_needs_commit = false;
 };
@@ -283,17 +283,17 @@ public:
 		return (*reinterpret_cast<function_t**>(this))[2](this, name);
 	}
 
-	c_utl_ts_hash<schema_class_binding_t*> get_classes()
+	utl_ts_hash<schema_class_binding_t*> get_classes()
 	{
 		return this->m_classes;
 	}
 
 private:
-	unsigned char pad1[0x8];
+	char pad1[0x8];
 	std::array<char, 256> m_name = { };
 	unsigned char pad2[0x450];
-	c_utl_ts_hash<schema_class_binding_t*> m_classes;
-	unsigned char pad3[0x2804];
+	utl_ts_hash<schema_class_binding_t*> m_classes;
+	char pad3[0x2804];
 };
 
 class i_schema_system

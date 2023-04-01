@@ -4,6 +4,7 @@
 
 #include "../utilities/utilities.hpp"
 #include "../source2-sdk/sdk.hpp"
+#include "../config/config.hpp"
 
 typedef struct _box_t
 {
@@ -82,6 +83,11 @@ static bool get_bounding_box(player_t* player, box_t& box)
 
 static void draw_box(box_t& box)
 {
+    if (!config::context.draw_box)
+    {
+        return;
+    }
+
     renderer::rect(box.x - 1, box.y - 1, box.w + 2, box.h + 2, color_t::black());
     renderer::rect(box.x + 1, box.y + 1, box.w - 2, box.h - 2, color_t::black());
     renderer::rect(box.x, box.y, box.w, box.h, color_t::white());
@@ -89,6 +95,11 @@ static void draw_box(box_t& box)
 
 static void draw_health(box_t& box, std::int32_t player_health)
 {
+    if (!config::context.draw_health)
+    {
+        return;
+    }
+
     float bar_height = player_health * box.h / 100.f;
     std::uint8_t color_scale = static_cast<std::uint8_t>(player_health * 2.55);
 
@@ -101,6 +112,11 @@ static void draw_health(box_t& box, std::int32_t player_health)
 
 static void draw_name(box_t& box, const char* player_name)
 {
+    if (!config::context.draw_name)
+    {
+        return;
+    }
+
     std::string name(player_name);
 
     if (name.empty())
@@ -113,11 +129,16 @@ static void draw_name(box_t& box, const char* player_name)
         name = name.substr(0, 15) + "...";
     }
 
-    renderer::text(box.x + (box.w / 2.f), box.y - 13, color_t::white(), name.c_str(), true);
+    renderer::text_centered(box.x, box.y, box.w, box.h, color_t::white(), player_name);
 }
 
 void visuals::run_player_esp()
 {
+    if (!config::context.player_esp)
+    {
+        return;
+    }
+
     if (!interfaces::engine->is_connected() || !interfaces::engine->is_in_game())
     {
         return;
@@ -130,7 +151,7 @@ void visuals::run_player_esp()
     
     box_t box = { };
 
-    for (std::uint32_t i = 0; i < interfaces::globals->maxclients; i++)
+    for (std::uint32_t i = 0; i < interfaces::globals->max_clients; i++)
     {
         controller_t* controller = interfaces::entity_list->get_controller_by_index(i);
 
@@ -146,7 +167,12 @@ void visuals::run_player_esp()
             continue;
         }
 
-        if (!player || !player->is_alive() || player->team() == sdk::local_player->team())
+        if (!player || !player->is_alive())
+        {
+            continue;
+        }
+
+        if (player->team() == sdk::local_player->team() && !config::context.teammate_esp)
         {
             continue;
         }

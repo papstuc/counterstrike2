@@ -11,9 +11,10 @@
 #include "math/color_t.hpp"
 #include "math/vec2_t.hpp"
 #include "math/vec3_t.hpp"
-#include "math/point_t.hpp"
 
 #include "schema_system/schema_system.hpp"
+
+#include "sdl/sdl.hpp"
 
 namespace sdk
 {
@@ -21,7 +22,7 @@ namespace sdk
 	extern std::int32_t screen_width;
 	extern std::int32_t screen_height;
 
-	void* get_entity_index(int index);
-	void* get_player_pawn(void* entity);
-	void* get_player_pawn_handle(std::uint16_t handle);
+	void update_local_player();
+	void update_global_vars();
+	void update_screen_size();
 }

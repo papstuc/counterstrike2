@@ -6,18 +6,18 @@ class global_vars_t
 {
 public:
     float realtime;
-    std::int32_t framecount;
-    unsigned char pad1[0x8];
-    std::uint32_t maxclients;
+    std::int32_t frame_count;
+    char pad1[0x8];
+    std::uint32_t max_clients;
     float intervalpertick;
-    unsigned char pad2[0x12];
+    char pad2[0x12];
     float curtime;
     float curtime2;
-    unsigned char pad3[0xC];
-    std::int32_t tickcount;
+    char pad3[0xC];
+    std::int32_t tick_count;
     float intervalpertick2;
     void* current_netchan;
-    unsigned char pad4[0x130];
+    char pad4[0x130];
     char* current_map;
     char* current_mapname;
 };

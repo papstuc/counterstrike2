@@ -117,9 +117,11 @@ std::int64_t __fastcall hooks::frame_stage_notify::hook(std::int64_t a1, std::in
 	return frame_stage_notify_original(a1, a2);
 }
 
-bool __fastcall hooks::create_move::hook(void* a1, std::uint32_t sequence_number, std::uint8_t a3)
+bool __fastcall hooks::create_move::hook(void* a1, std::uint32_t a2, std::uint8_t a3)
 {
-	create_move_original(a1, sequence_number, a3);
+	create_move_original(a1, a2, a3);
+
+	user_cmd_t* user_cmd = interfaces::csgo_input->get_user_cmd(a1, a2);
 
 	sdk::update_local_player();
 

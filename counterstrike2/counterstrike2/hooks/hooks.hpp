@@ -25,7 +25,7 @@ namespace hooks
 	namespace create_move
 	{
 		using function_t = bool(__fastcall*)(void*, std::uint32_t, std::uint8_t);
-		bool __fastcall hook(void* a1, std::uint32_t sequence_number, std::uint8_t a3);
+		bool __fastcall hook(void* a1, std::uint32_t a2, std::uint8_t a3);
 	}
 
 	namespace swap_chain_present

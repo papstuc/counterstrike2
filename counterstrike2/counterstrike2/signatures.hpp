@@ -11,7 +11,7 @@
 
 // interfaces.cpp
 #define GLOBAL_VARS "48 8B 05 ? ? ? ? 4C 8D 0D ? ? ? ? F2 0F 11 74 24 ? 4C 8D 05 ? ? ? ? BA"
-#define CSGO_INPUT "48 8B 0D ? ? ? ? 4C 8D 8F ? ? ? ? 33 ED"
+#define CSGO_INPUT "48 8B 0D ? ? ? ? 48 8B 01 FF 50 ? 8B DF"
 #define RENDERER "66 0F 7F 05 ? ? ? ? 66 0F 7F 0D ? ? ? ? 48 89 35"
 #define ENTITY_LIST "48 8B 0D ? ? ? ? 8B D3 E8 ? ? ? ? 48 8B F0"
 #define CLIENT_MODE "48 8B 0D ? ? ? ? 48 85 C9 74 44 F6 42 10 20 74 14 48 8B 01 4C 8D 4F 70"

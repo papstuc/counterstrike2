@@ -13,6 +13,7 @@ i_entity_list* interfaces::entity_list = nullptr;
 i_input_system* interfaces::input_system = nullptr;
 i_renderer* interfaces::renderer = nullptr;
 i_schema_system* interfaces::schema_system = nullptr;
+i_trace* interfaces::trace = nullptr;
 global_vars_t* interfaces::globals = nullptr;
 
 template<typename T>
@@ -73,9 +74,10 @@ bool interfaces::initialize()
 	interfaces::input_system = get_interface<i_input_system>(L"inputsystem.dll", "InputSystemVersion001");
 	interfaces::renderer = **reinterpret_cast<i_renderer***>(utilities::resolve_rip(utilities::pattern_scan(L"rendersystemdx11.dll", RENDERER), 4, 8));
 	interfaces::schema_system = get_interface<i_schema_system>(L"schemasystem.dll", "SchemaSystem_001");
+	interfaces::trace = *reinterpret_cast<i_trace**>(utilities::resolve_rip(utilities::pattern_scan(L"client.dll", TRACE_MANAGER), 3, 7));
 	interfaces::globals = *reinterpret_cast<global_vars_t**>(utilities::resolve_rip(utilities::pattern_scan(L"client.dll", GLOBAL_VARS), 3, 7));
 
-	if (!interfaces::csgo_input || !interfaces::engine || !interfaces::entity_list || !interfaces::input_system || !interfaces::renderer || !interfaces::schema_system || !interfaces::globals)
+	if (!interfaces::csgo_input || !interfaces::engine || !interfaces::entity_list || !interfaces::input_system || !interfaces::renderer || !interfaces::schema_system || !interfaces::trace || !interfaces::globals)
 	{
 		debug::log("[-] failed to initialize interfaces\n");
 		return false;

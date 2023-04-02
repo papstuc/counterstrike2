@@ -7,6 +7,7 @@
 #include "i_input_system.hpp"
 #include "i_renderer.hpp"
 #include "i_schema_system.hpp"
+#include "i_trace.hpp"
 #include "../classes/global_vars.hpp"
 
 namespace interfaces
@@ -18,6 +19,7 @@ namespace interfaces
 	extern i_input_system* input_system;
 	extern i_renderer* renderer;
 	extern i_schema_system* schema_system;
+	extern i_trace* trace;
 	extern global_vars_t* globals;
 
 	bool initialize();

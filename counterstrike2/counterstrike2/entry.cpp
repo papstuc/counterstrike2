@@ -1,11 +1,12 @@
+#include <chrono>
+#include <thread>
+
 #include "source2-sdk/interfaces/interfaces.hpp"
 #include "source2-sdk/schema_system/schema_system.hpp"
 #include "utilities/debug_console/debug.hpp"
 #include "hooks/hooks.hpp"
 #include "menu/menu.hpp"
 
-#include <chrono>
-#include <thread>
 
 DWORD WINAPI initialize(void* instance)
 {

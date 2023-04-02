@@ -122,6 +122,7 @@
     <ClInclude Include="menu\menu.hpp" />
     <ClInclude Include="signatures.hpp" />
     <ClInclude Include="source2-sdk\classes\entities.hpp" />
+    <ClInclude Include="source2-sdk\classes\trace.hpp" />
     <ClInclude Include="source2-sdk\classes\user_cmd.hpp" />
     <ClInclude Include="source2-sdk\interfaces\i_client.hpp" />
     <ClInclude Include="source2-sdk\interfaces\i_csgo_input.hpp" />
@@ -130,6 +131,7 @@
     <ClInclude Include="source2-sdk\interfaces\i_input_system.hpp" />
     <ClInclude Include="source2-sdk\interfaces\i_renderer.hpp" />
     <ClInclude Include="source2-sdk\interfaces\i_schema_system.hpp" />
+    <ClInclude Include="source2-sdk\interfaces\i_trace.hpp" />
     <ClInclude Include="source2-sdk\math\color_t.hpp" />
     <ClInclude Include="source2-sdk\math\math.hpp" />
     <ClInclude Include="source2-sdk\math\vec2_t.hpp" />

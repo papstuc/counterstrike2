@@ -4,16 +4,10 @@
 #include <cstdarg>
 #include <cstdio>
 
-
 void console::console_color_msg(color_t color, const char* message ...)
 {
     using function_t = void(__cdecl*)(color_t&, const char*);
-    static function_t p_console_color_msg = reinterpret_cast<decltype(p_console_color_msg)>(GetProcAddress(GetModuleHandle(L"tier0.dll"), "?ConColorMsg@@YAXAEBVColor@@PEBDZZ"));
-
-    if (!p_console_color_msg)
-    {
-        return;
-    }
+    static function_t fn = reinterpret_cast<function_t>(GetProcAddress(GetModuleHandle(L"tier0.dll"), "?ConColorMsg@@YAXAEBVColor@@PEBDZZ"));
 
     char buffer[1024] = { };
     va_list args = nullptr;
@@ -22,5 +16,5 @@ void console::console_color_msg(color_t color, const char* message ...)
     vsprintf_s(buffer, message, args);
     va_end(args);
 
-    p_console_color_msg(color, buffer);
+    fn(color, buffer);
 }

@@ -84,6 +84,7 @@ class game_scene_node_t
 public:
     SCHEMA("CGameSceneNode", "m_vecAbsOrigin", abs_origin, vec3_t);
     SCHEMA("CGameSceneNode", "m_vecOrigin", vec_origin, vec3_t);
+    SCHEMA("CGameSceneNode", "m_bDormant", dormant, bool);
 };
 
 class collision_property_t

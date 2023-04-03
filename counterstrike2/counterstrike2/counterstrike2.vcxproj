@@ -121,7 +121,6 @@
     <ClInclude Include="hooks\hooks.hpp" />
     <ClInclude Include="menu\menu.hpp" />
     <ClInclude Include="signatures.hpp" />
-    <ClInclude Include="source2-sdk\classes\bones.hpp" />
     <ClInclude Include="source2-sdk\classes\entities.hpp" />
     <ClInclude Include="source2-sdk\classes\trace.hpp" />
     <ClInclude Include="source2-sdk\classes\user_cmd.hpp" />

@@ -26,7 +26,7 @@ public:
         return reinterpret_cast<user_cmd_t*>(split_screen);
     }
 
-    void set_view_angles(vec3_t angles)
+    void set_view_angles(vec3_t& angles)
     {
         using function_t = std::int64_t(__fastcall*)(i_csgo_input*, std::int32_t, vec3_t&);
         static function_t fn = reinterpret_cast<function_t>(utilities::pattern_scan(L"client.dll", SET_VIEW_ANGLES));

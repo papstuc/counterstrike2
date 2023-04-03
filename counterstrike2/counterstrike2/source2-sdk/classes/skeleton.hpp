@@ -2,31 +2,53 @@
 
 #include <cstdint>
 #include "../math/vec3_t.hpp"
+#include "../math/vec4_t.hpp"
 
-typedef struct _matrix4x2_t
+typedef struct _bone_t
 {
-	union
-	{
-		struct
-		{
-			float m11, m12, m13, m14;
-			float m21, m22, m23, m24;
-		};
-		float matrix[4][2];
-	};
-} matrix4x2_t;
+    const char* bone_name;
+    const char* parent_name;
+    char pad1[0x30];
+    vec3_t center;
+    vec3_t size;
+    float radius;
+} bone_t;
 
-static_assert(sizeof(matrix4x2_t) == 0x20, "matrix4x2_t has wrong size");
+static_assert(sizeof(bone_t) == 0x60, "global_vars_t has wrong size");
 
-class skeleton_t
+typedef struct _render_mesh_t
+{
+    char pad1[0xBC];
+    bone_t* skeleton;
+} render_mesh_t;
+
+static_assert(sizeof(render_mesh_t) == 0xC8, "render_mesh_t has wrong size");
+
+typedef struct _render_meshes_t
+{
+    render_mesh_t* meshes;
+} render_meshes_t;
+
+static_assert(sizeof(render_meshes_t) == 0x8, "render_meshes_t has wrong size");
+
+typedef struct _model_t
+{
+    char pad1[0x78];
+    render_meshes_t* render_mesh;
+} model_t;
+
+static_assert(sizeof(model_t) == 0x80, "model_t has wrong size");
+
+class skeleton_instance
 {
 public:
-	char pad1[0x1BC];
-	std::int32_t bone_count;
-	char pad2[0x18];
-	std::int32_t mask;
-	char pad3[0x4];
-	matrix4x2_t* bone_matrix;
-};
+    model_t* get_model()
+    {
+        auto ptr = *reinterpret_cast<void**>((uintptr_t)this + 0x200);
 
-static_assert(sizeof(skeleton_t) == 0x1E8, "skeleton_t has wrong size");
+        if (!ptr)
+            return nullptr;
+
+        return *reinterpret_cast<model_t**>(ptr);
+    }
+};

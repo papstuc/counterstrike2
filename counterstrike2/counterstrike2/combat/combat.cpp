@@ -52,8 +52,5 @@ void combat::run_aimbot(user_cmd_t* cmd)
         {
             continue;
         }
-
-        vec3_t t = player->get_bone_position(8);
     }
-
 }

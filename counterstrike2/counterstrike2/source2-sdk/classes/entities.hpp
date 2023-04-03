@@ -146,10 +146,11 @@ public:
         return this->game_scene_node()->vec_origin() + this->view_offset();
     }
 
-    vec3_t get_bone_position(std::int32_t bone)
+    vec3_t get_bone_position(std::int32_t bone_index)
     {
-        skeleton_t* skeleton = *reinterpret_cast<skeleton_t**>((std::uintptr_t)this + 0x300);
-        return vec3_t(skeleton->bone_matrix[bone].m21, skeleton->bone_matrix[bone].m22, skeleton->bone_matrix[bone].m23);
+        void* skeleton_instance = *reinterpret_cast<void**>((std::uintptr_t)this + 0x300);
+        model_t* model = **reinterpret_cast<model_t***>((std::uintptr_t)skeleton_instance + 0x200);
+        return model->render_mesh->meshes->skeleton[bone_index].center;
     }
 
     bool is_alive()

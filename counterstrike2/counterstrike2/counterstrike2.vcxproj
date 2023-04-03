@@ -92,6 +92,7 @@
     <ClCompile Include="source2-sdk\math\math.cpp" />
     <ClCompile Include="source2-sdk\math\vec2_t.cpp" />
     <ClCompile Include="source2-sdk\math\vec3_t.cpp" />
+    <ClCompile Include="source2-sdk\math\vec4_t.cpp" />
     <ClCompile Include="source2-sdk\schema_system\schema_system.cpp" />
     <ClCompile Include="source2-sdk\sdk.cpp" />
     <ClCompile Include="source2-sdk\sdl\sdl.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="source2-sdk\math\math.hpp" />
     <ClInclude Include="source2-sdk\math\vec2_t.hpp" />
     <ClInclude Include="source2-sdk\math\vec3_t.hpp" />
+    <ClInclude Include="source2-sdk\math\vec4_t.hpp" />
     <ClInclude Include="source2-sdk\schema_system\schema_system.hpp" />
     <ClInclude Include="source2-sdk\sdk.hpp" />
     <ClInclude Include="source2-sdk\sdl\sdl.hpp" />

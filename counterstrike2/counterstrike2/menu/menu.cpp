@@ -34,6 +34,13 @@ void menu::render()
 	{
 		if (ImGui::BeginTabBar("##features"))
 		{
+			if (ImGui::BeginTabItem("combat"))
+			{
+				ImGui::Checkbox("aimbot", &config::context.aimbot);
+				ImGui::SliderFloat("fov", &config::context.aimbot_fov, 1.f, 60.f, "%.2f");
+				ImGui::EndTabItem();
+			}
+
 			if (ImGui::BeginTabItem("player esp"))
 			{
 				ImGui::Checkbox("players", &config::context.player_esp);

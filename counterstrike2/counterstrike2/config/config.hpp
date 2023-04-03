@@ -15,6 +15,7 @@ namespace config
 		bool draw_health = false;
 
 		bool aimbot = false;
+		float aimbot_fov = 1.f;
 	} config_t;
 
 	typedef struct _file_t

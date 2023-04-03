@@ -127,6 +127,7 @@ public:
     SCHEMA("C_BaseEntity", "m_pGameSceneNode", game_scene_node, game_scene_node_t*);
     SCHEMA("C_BaseEntity", "m_pCollision", collision_property, collision_property_t*);
 
+
     SCHEMA("C_BaseEntity", "m_hOwnerEntity", owner_handle, unsigned long);
     SCHEMA("C_BaseEntity", "m_flSimulationTime", simulation_time, float);
 };
@@ -139,6 +140,12 @@ public:
     SCHEMA("C_CSPlayerPawnBase", "m_bGunGameImmunity", has_gun_immunity, bool);
     SCHEMA("C_BaseEntity", "m_iHealth", health, std::int32_t);
     SCHEMA("C_BaseEntity", "m_iTeamNum", team, std::uint8_t);
+    SCHEMA("C_BaseModelEntity", "m_vecViewOffset", view_offset, vec3_t);
+
+    vec3_t get_eye_pos()
+    {
+        return this->game_scene_node()->vec_origin() + this->view_offset();
+    }
 
     bool is_alive()
     {

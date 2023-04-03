@@ -251,5 +251,8 @@
     <ClInclude Include="source2-sdk\classes\trace.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source2-sdk\classes\bones.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

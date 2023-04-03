@@ -4,6 +4,7 @@
 
 #include "../schema_system/schema_system.hpp"
 #include "../math/vec3_t.hpp"
+#include "skeleton.hpp"
 
 enum buttons_t : std::uint32_t
 {
@@ -126,8 +127,6 @@ class entity_t
 public:
     SCHEMA("C_BaseEntity", "m_pGameSceneNode", game_scene_node, game_scene_node_t*);
     SCHEMA("C_BaseEntity", "m_pCollision", collision_property, collision_property_t*);
-
-
     SCHEMA("C_BaseEntity", "m_hOwnerEntity", owner_handle, unsigned long);
     SCHEMA("C_BaseEntity", "m_flSimulationTime", simulation_time, float);
 };
@@ -145,6 +144,12 @@ public:
     vec3_t get_eye_pos()
     {
         return this->game_scene_node()->vec_origin() + this->view_offset();
+    }
+
+    vec3_t get_bone_position(std::int32_t bone)
+    {
+        skeleton_t* skeleton = *reinterpret_cast<skeleton_t**>((std::uintptr_t)this + 0x300);
+        return vec3_t(skeleton->bone_matrix[bone].m11, skeleton->bone_matrix[bone].m12, skeleton->bone_matrix[bone].m13);
     }
 
     bool is_alive()

@@ -49,6 +49,5 @@ void combat::run_aimbot(user_cmd_t* cmd)
         {
             continue;
         }
-
     }
 }

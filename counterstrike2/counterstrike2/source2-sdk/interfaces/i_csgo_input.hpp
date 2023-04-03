@@ -1,6 +1,10 @@
 #pragma once
 
+#include "../../signatures.hpp"
+
+#include "../math/vec3_t.hpp"
 #include "../classes/user_cmd.hpp"
+#include "../../utilities/utilities.hpp"
 
 enum csgo_input_vtable
 {
@@ -20,5 +24,13 @@ public:
         std::uint64_t split_screen = v7 + 0x10;
 
         return reinterpret_cast<user_cmd_t*>(split_screen);
+    }
+
+    void set_view_angles(vec3_t angles)
+    {
+        using function_t = std::int64_t(__fastcall*)(i_csgo_input*, std::int32_t, vec3_t&);
+        static function_t fn = reinterpret_cast<function_t>(utilities::pattern_scan(L"client.dll", SET_VIEW_ANGLES));
+
+        fn(this, 0, angles);
     }
 };

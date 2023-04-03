@@ -9,6 +9,9 @@
 #define GET_LOCAL_PLAYER "48 83 EC ? 83 F9 ? 75 ? 48 8B 0D ? ? ? ? 48 8D 54 24 ? 48 8B 01 FF 90 ? ? ? ? 8B 08 48 63 C1 48 8D 0D ? ? ? ? 48 8B 0C C1"
 #define GET_PLAYER_FROM_CONTROLLER "4C 8B 05 ?? ?? ?? ?? 4D 85 C0 74 39 8B 89 D4 05"
 
+// i_csgo_input.hpp
+#define SET_VIEW_ANGLES "F2 41 0F 10 00 48 63 C2 48 69 D0"
+
 // i_trace.hpp
 #define CLIP_TRACE_TO_PLAYERS "48 8B C4 55 56 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 48 89 58"
 #define TRACE_SHAPE "48 89 54 24 ? 48 89 4C 24 ? 55 53 56 57 41 55 41 56 48 8D AC 24"

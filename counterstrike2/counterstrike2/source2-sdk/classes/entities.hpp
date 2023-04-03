@@ -149,7 +149,7 @@ public:
     vec3_t get_bone_position(std::int32_t bone)
     {
         skeleton_t* skeleton = *reinterpret_cast<skeleton_t**>((std::uintptr_t)this + 0x300);
-        return vec3_t(skeleton->bone_matrix[bone].m11, skeleton->bone_matrix[bone].m12, skeleton->bone_matrix[bone].m13);
+        return vec3_t(skeleton->bone_matrix[bone].m21, skeleton->bone_matrix[bone].m22, skeleton->bone_matrix[bone].m23);
     }
 
     bool is_alive()

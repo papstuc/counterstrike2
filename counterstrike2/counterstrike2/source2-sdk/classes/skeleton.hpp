@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include "../math/vec3_t.hpp"
 
 typedef struct _matrix4x2_t
 {

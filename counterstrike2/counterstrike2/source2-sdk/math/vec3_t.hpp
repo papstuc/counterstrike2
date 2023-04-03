@@ -12,4 +12,9 @@ public:
 	~vec3_t();
 
 	vec3_t operator+(vec3_t& other);
+	vec3_t operator-(vec3_t& other);
+	vec3_t& operator+=(vec3_t& other);
+
+	vec3_t clamp();
+	bool is_zero();
 };

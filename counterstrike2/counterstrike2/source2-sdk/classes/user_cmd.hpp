@@ -1,14 +1,13 @@
 #pragma once
 
 #include <cstdint>
+#include "../math/vec3_t.hpp"
 
 class cmd_qangle_t
 {
 public:
     char pad1[0x18];
-    float x;
-    float y;
-    float z;
+    vec3_t angles;
 };
 
 static_assert(sizeof(cmd_qangle_t) == 0x24, "cmd_qangle_t has wrong size");

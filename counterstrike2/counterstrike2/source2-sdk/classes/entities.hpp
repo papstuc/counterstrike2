@@ -148,8 +148,8 @@ public:
 
     vec3_t get_bone_position(std::int32_t bone_index)
     {
-        void* skeleton_instance = *reinterpret_cast<void**>((std::uintptr_t)this + 0x300);
-        model_t* model = **reinterpret_cast<model_t***>((std::uintptr_t)skeleton_instance + 0x200);
+        void* skeleton_instance = *reinterpret_cast<void**>(reinterpret_cast<std::uintptr_t>(this) + 0x300);
+        model_t* model = **reinterpret_cast<model_t***>(reinterpret_cast<std::uintptr_t>(skeleton_instance) + 0x200);
         return model->render_mesh->meshes->skeleton[bone_index].center;
     }
 

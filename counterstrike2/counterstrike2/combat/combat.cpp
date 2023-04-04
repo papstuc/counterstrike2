@@ -67,8 +67,6 @@ void combat::run_aimbot(user_cmd_t* cmd)
     for (std::uint32_t i = 0; i < interfaces::globals->max_clients; i++)
     {
         controller_t* controller = interfaces::entity_list->get_controller_by_index(i);
-
-        std::uint32_t handle = controller->pawn_handle();
         if (!controller)
         {
             continue;

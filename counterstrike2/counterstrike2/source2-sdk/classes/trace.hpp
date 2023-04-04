@@ -31,9 +31,9 @@ typedef struct _trace_filter_t
 	std::uint32_t skip_handles[4];
 	std::uint16_t collisions[2];
 	std::uint16_t unknown2;
+	std::uint8_t layer;
 	std::uint8_t unknown3;
 	std::uint8_t unknown4;
-	std::uint8_t unknown5;
 } trace_filter_t;
 
 static_assert(sizeof(trace_filter_t) == 0x38, "trace_filter_t has wrong size");

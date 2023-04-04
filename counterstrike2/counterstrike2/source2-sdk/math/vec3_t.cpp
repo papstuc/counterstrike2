@@ -39,14 +39,11 @@ vec3_t& vec3_t::operator+=(vec3_t& other)
 	return *this;
 }
 
-vec3_t vec3_t::clamp()
+void vec3_t::clamp()
 {
-	vec3_t clamped = *this;
 	this->x = std::clamp(x, -89.0f, 89.0f);
 	this->y = std::clamp(std::remainder(y, 360.0f), -180.0f, 180.0f);
 	this->z = std::clamp(z, -50.0f, 50.0f);
-
-	return clamped;
 }
 
 bool vec3_t::is_zero()

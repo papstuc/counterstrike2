@@ -93,6 +93,11 @@ class collision_property_t
 public:
     SCHEMA("CCollisionProperty", "m_vecMins", mins, vec3_t);
     SCHEMA("CCollisionProperty", "m_vecMaxs", maxs, vec3_t);
+
+    std::uint16_t get_collision_mask()
+    {
+        return *reinterpret_cast<std::uint16_t*>(reinterpret_cast<std::uintptr_t>(this) + 0x38);
+    }
 };
 
 class econ_item_view_t
@@ -127,7 +132,7 @@ class entity_t
 public:
     SCHEMA("C_BaseEntity", "m_pGameSceneNode", game_scene_node, game_scene_node_t*);
     SCHEMA("C_BaseEntity", "m_pCollision", collision_property, collision_property_t*);
-    SCHEMA("C_BaseEntity", "m_hOwnerEntity", owner_handle, unsigned long);
+    SCHEMA("C_BaseEntity", "m_hOwnerEntity", owner_handle, std::uint32_t);
     SCHEMA("C_BaseEntity", "m_flSimulationTime", simulation_time, float);
 };
 
@@ -140,17 +145,23 @@ public:
     SCHEMA("C_BaseEntity", "m_iHealth", health, std::int32_t);
     SCHEMA("C_BaseEntity", "m_iTeamNum", team, std::uint8_t);
     SCHEMA("C_BaseModelEntity", "m_vecViewOffset", view_offset, vec3_t);
+    SCHEMA("C_BasePlayerPawn", "m_hController", controller_handle, std::uint32_t);
 
-    vec3_t get_eye_pos()
+
+    vec3_t get_eye_position()
     {
-        return this->game_scene_node()->vec_origin() + this->view_offset();
+        vec3_t position;
+        using function_t = void* (__fastcall*)(player_t*, vec3_t&);
+
+        (*reinterpret_cast<function_t**>(this))[154](this, position);
+
+        return position;
     }
 
     vec3_t get_bone_position(std::int32_t bone_index)
     {
-        void* skeleton_instance = *reinterpret_cast<void**>(reinterpret_cast<std::uintptr_t>(this) + 0x300);
-        model_t* model = **reinterpret_cast<model_t***>(reinterpret_cast<std::uintptr_t>(skeleton_instance) + 0x200);
-        return model->render_mesh->meshes->skeleton[bone_index].center;
+        // soon to follow
+        return this->get_eye_position();
     }
 
     bool is_alive()
@@ -163,7 +174,7 @@ class controller_t
 {
 public:
     SCHEMA("CBasePlayerController", "m_steamID", steam_id, std::uint64_t);
-    SCHEMA("CBasePlayerController", "m_hPawn", pawn, player_t*);
+    SCHEMA("CBasePlayerController", "m_hPawn", pawn_handle, std::uint32_t);
     SCHEMA("CBasePlayerController", "m_bIsLocalPlayerController", is_local_player_controller, bool);
     SCHEMA("CCSPlayerController", "m_sSanitizedPlayerName", name, const char*);
 };

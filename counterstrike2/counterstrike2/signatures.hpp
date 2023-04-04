@@ -7,6 +7,7 @@
 // i_entity_list.hpp
 #define GET_CONTROLLER_BY_INDEX "81 FA ? ? ? ? 77 3B 8B C2"
 #define GET_LOCAL_PLAYER "48 83 EC ? 83 F9 ? 75 ? 48 8B 0D ? ? ? ? 48 8D 54 24 ? 48 8B 01 FF 90 ? ? ? ? 8B 08 48 63 C1 48 8D 0D ? ? ? ? 48 8B 0C C1"
+#define GET_LOCAL_CONTROLLER "8B 05 ? ? ? ? 89 01 8B 05"
 #define GET_PLAYER_FROM_CONTROLLER "4C 8B 05 ?? ?? ?? ?? 4D 85 C0 74 39 8B 89 D4 05"
 
 // i_csgo_input.hpp
@@ -26,3 +27,6 @@
 
 // math.cpp
 #define WORLD_TO_SCREEN "48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC ? 48 8B 1D ? ? ? ? 48 8B FA"
+
+// sdk.cpp
+#define RESOLVE_HANDLE "48 83 EC ? 83 F9 ? 75 ? 48 8B 0D ? ? ? ? 48 8D 54 24 ? 48 8B 01 FF 90 ? ? ? ? 8B 08 48 63 C1 48 8D 0D ? ? ? ? 48 8B 0C C1"

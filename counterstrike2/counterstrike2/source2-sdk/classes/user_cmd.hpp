@@ -16,7 +16,7 @@ class user_cmd_base_t
 {
 public:
     char pad1[0x40];
-    cmd_qangle_t* view_angles;
+    cmd_qangle_t* view;
 };
 
 static_assert(sizeof(user_cmd_base_t) == 0x48, "user_cmd_base_t has wrong size");

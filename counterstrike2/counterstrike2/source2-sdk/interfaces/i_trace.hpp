@@ -17,9 +17,9 @@ public:
 		fn(start, end, filter, trace, min, max, length);
 	}
 
-	void trace_shape(ray_t* ray, vec3_t& start, vec3_t& end, void* filter, game_trace_t* trace)
+	void trace_shape(ray_t* ray, vec3_t& start, vec3_t& end, trace_filter_t* filter, game_trace_t* trace)
 	{
-		using function_t = bool(__fastcall*)(i_trace*, ray_t*, vec3_t&, vec3_t&, void*, game_trace_t*);
+		using function_t = bool(__fastcall*)(i_trace*, ray_t*, vec3_t&, vec3_t&, trace_filter_t*, game_trace_t*);
 		static function_t fn = reinterpret_cast<function_t>(utilities::pattern_scan(L"client.dll", TRACE_SHAPE));
 
 		fn(this, ray, start, end, filter, trace);

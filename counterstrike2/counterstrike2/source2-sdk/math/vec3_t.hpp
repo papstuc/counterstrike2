@@ -15,6 +15,6 @@ public:
 	vec3_t operator-(vec3_t& other);
 	vec3_t& operator+=(vec3_t& other);
 
-	vec3_t clamp();
+	void clamp();
 	bool is_zero();
 };

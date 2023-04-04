@@ -62,11 +62,10 @@ void combat::run_aimbot(user_cmd_t* cmd)
     vec3_t best_target = vec3_t();
     vec3_t local_eye_position = sdk::local_player->get_eye_position();
 
-    std::uint32_t pawn_handle = sdk::local_controller->pawn_handle();
-
     for (std::uint32_t i = 0; i < interfaces::globals->max_clients; i++)
     {
         controller_t* controller = interfaces::entity_list->get_controller_by_index(i);
+
         if (!controller)
         {
             continue;

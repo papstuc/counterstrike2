@@ -5,43 +5,7 @@
 
 #include <cmath>
 
-static bool can_see_player_position(player_t* local_player, std::uint32_t local_player_handle, player_t* player, std::uint32_t player_handle, vec3_t& position)
-{
-    trace_filter_t filter = { };
-    filter.unknown1[0] = 0;
-    filter.unknown1[1] = 0;
-    filter.unknown2 = 7;
-    filter.layer = 4;
-    filter.unknown3 = 0x49;
-    //filter.unknown3 |= 2;
-
-    filter.unknown4 = 0;
-
-    filter.skip_handles[0] = local_player_handle;
-    filter.skip_handles[1] = 0;
-    filter.skip_handles[2] = local_player->owner_handle();
-    filter.skip_handles[3] = 0;
-
-    filter.collisions[0] = local_player->collision_property()->get_collision_mask();
-    filter.collisions[1] = 0;
-
-    filter.mask = 0x1C1003;
-
-    ray_t ray = { };
-    game_trace_t trace = { };
-
-    vec3_t eye_position = local_player->get_eye_position();
-    interfaces::trace->trace_shape(&ray, eye_position, position, &filter, &trace);
-
-    if (trace.fraction == 1.f)
-    {
-        return false;
-    }
-
-    return true;
-}
-
-void combat::run_aimbot(user_cmd_t* cmd)
+void combat::run_aimbot(c_user_cmd* cmd)
 {
 	if (!config::context.aimbot)
 	{
@@ -88,12 +52,7 @@ void combat::run_aimbot(user_cmd_t* cmd)
             continue;
         }
 
-        vec3_t bone_position = player->get_bone_position(8);
-
-        /*if (!can_see_player_position(sdk::local_player, pawn_handle, player, handle, bone_position))
-        {
-            continue;
-        }*/
+        vec3_t bone_position = player->get_eye_position();
 
         vec3_t angle = math::calculate_angle(local_eye_position, bone_position, cmd->base->view->angles);
         angle.clamp();

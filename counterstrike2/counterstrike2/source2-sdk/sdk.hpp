@@ -18,12 +18,10 @@
 
 namespace sdk
 {
-	extern controller_t* local_controller;
 	extern player_t* local_player;
 	extern std::int32_t screen_width;
 	extern std::int32_t screen_height;
 
-	void update_local_controller();
 	void update_local_player();
 	void update_global_vars();
 	void update_screen_size();

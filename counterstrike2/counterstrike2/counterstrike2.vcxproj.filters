@@ -251,9 +251,6 @@
     <ClInclude Include="source2-sdk\interfaces\i_trace.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source2-sdk\classes\trace.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="source2-sdk\classes\skeleton.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>

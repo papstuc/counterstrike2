@@ -26,3 +26,8 @@ void renderer::text_centered(float x, float y, float w, float h, color_t color, 
 	ImGui::GetBackgroundDrawList()->AddText(ImVec2(text_position.x + 1.f, text_position.y + 1.f), color_t::black().dump(), text);
 	ImGui::GetBackgroundDrawList()->AddText(ImVec2(text_position.x, text_position.y), color.dump(), text);
 }
+
+void renderer::line(float x, float y, float x1, float y1, color_t color)
+{
+	ImGui::GetBackgroundDrawList()->AddLine(ImVec2(x, y), ImVec2(x1, y1), color.dump());
+}

@@ -4,5 +4,5 @@
 
 namespace combat
 {
-	void run_aimbot(user_cmd_t* cmd);
+	void run_aimbot(c_user_cmd* cmd);
 }

@@ -3,21 +3,9 @@
 #include "../signatures.hpp"
 #include "../utilities/utilities.hpp"
 
-controller_t* sdk::local_controller = nullptr;
 player_t* sdk::local_player = nullptr;
 std::int32_t sdk::screen_width = 0;
 std::int32_t sdk::screen_height = 0;
-
-void sdk::update_local_controller()
-{
-	if (!interfaces::engine->is_connected() || !interfaces::engine->is_in_game())
-	{
-		sdk::local_player = nullptr;
-		return;
-	}
-
-	sdk::local_controller = interfaces::entity_list->get_local_controller();
-}
 
 void sdk::update_local_player()
 {

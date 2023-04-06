@@ -4,10 +4,13 @@
 #include "../source2-sdk/sdk.hpp"
 
 #include <cmath>
+#include <vector>
 
-void combat::run_aimbot(c_user_cmd* cmd)
+static std::vector<std::uint32_t> bones;
+
+void combat::run_legitbot(c_user_cmd* cmd)
 {
-	if (!config::context.aimbot)
+	if (!config::context.legitbot)
 	{
 		return;
 	}
@@ -22,9 +25,40 @@ void combat::run_aimbot(c_user_cmd* cmd)
         return;
     }
 
-    float target_fov = config::context.aimbot_fov;
+    float target_fov = config::context.legit_fov;
     vec3_t best_target = vec3_t();
     vec3_t local_eye_position = sdk::local_player->get_eye_position();
+
+    if (config::context.hitboxes[0])
+    {
+        bones.emplace_back(6); // head
+        bones.emplace_back(5); // neck
+    }
+
+    if (config::context.hitboxes[1])
+    {
+        bones.emplace_back(0); // pelvis
+        bones.emplace_back(1); // spine_0
+        bones.emplace_back(2); // spine_1
+        bones.emplace_back(3); // spine_2
+        bones.emplace_back(4); // spine_3
+    }
+
+    if (config::context.hitboxes[2])
+    {
+        bones.emplace_back(10); // arm_upper_l
+        bones.emplace_back(11); // arm_lower_l
+        bones.emplace_back(15); // arm_upper_r
+        bones.emplace_back(16); // arm_lower_r
+    }
+
+    if (config::context.hitboxes[3])
+    {
+        bones.emplace_back(23); // leg_upper_l
+        bones.emplace_back(24); // leg_lower_l
+        bones.emplace_back(26); // leg_upper_r
+        bones.emplace_back(27); // leg_lower_r
+    }
 
     for (std::uint32_t i = 0; i < interfaces::globals->max_clients; i++)
     {
@@ -50,20 +84,29 @@ void combat::run_aimbot(c_user_cmd* cmd)
         if (player->team() == sdk::local_player->team())
         {
             continue;
+
         }
 
-        vec3_t bone_position = player->get_eye_position();
+        vec3_t bone_position = { };
+        vec3_t bone_rotation = { };
 
-        vec3_t angle = math::calculate_angle(local_eye_position, bone_position, cmd->base->view->angles);
-        angle.clamp();
-
-        float fov = std::hypotf(angle.x, angle.y);
-        if (fov < target_fov)
+        for (std::uint32_t bone_id : bones)
         {
-            best_target = bone_position;
-            target_fov = fov;
+            player->get_bone_position(bone_id, bone_position, bone_rotation);
+
+            vec3_t angle = math::calculate_angle(local_eye_position, bone_position, cmd->base->view->angles);
+            angle.clamp();
+
+            float fov = std::hypotf(angle.x, angle.y);
+            if (fov < target_fov)
+            {
+                best_target = bone_position;
+                target_fov = fov;
+            }
         }
     }
+
+    bones.clear();
 
     if (best_target.is_zero())
     {
@@ -73,6 +116,9 @@ void combat::run_aimbot(c_user_cmd* cmd)
     vec3_t angle = math::calculate_angle(local_eye_position, best_target, cmd->base->view->angles);
     angle.clamp();
 
+    angle /= config::context.smooth;
+
     cmd->base->view->angles += angle;
+
     interfaces::csgo_input->set_view_angles(cmd->base->view->angles);
 }

@@ -7,6 +7,7 @@
 #include "../source2-sdk/sdk.hpp"
 #include "../visuals/visuals.hpp"
 #include "../combat/combat.hpp"
+#include "../combat/anti_aim.hpp"
 #include "../menu/menu.hpp"
 
 #include "../utilities/imgui/imgui.h"
@@ -17,6 +18,8 @@
 #include <d3d11.h>
 #include <cstdint>
 #include <dxgi.h>
+#include <cmath>
+#include <algorithm>
 
 static hooks::level_init::function_t level_init_original = nullptr;
 static hooks::frame_stage_notify::function_t frame_stage_notify_original = nullptr;
@@ -123,12 +126,23 @@ bool __fastcall hooks::create_move::hook(void* a1, std::uint32_t a2, std::uint8_
 	create_move_original(a1, a2, a3);
 
 	sdk::update_local_player();
+	c_user_cmd* cmd = interfaces::csgo_input->get_user_cmd(a1, a2);
 
-	c_user_cmd* user_cmd = interfaces::csgo_input->get_user_cmd(a1, a2);
-	combat::run_aimbot(user_cmd);
+	vec3_t old_viewangles = cmd->base->view->angles;
+	float old_forwardmove = cmd->base->forwardmove;
+	float old_sidemove = cmd->base->sidemove;
 
-	interfaces::client->set_view_angles({ 180, 0, 0 });
+	combat::run_legitbot(cmd);
 
+	math::correct_movement(old_viewangles, cmd, old_forwardmove, old_sidemove);
+
+	cmd->base->forwardmove = std::clamp(cmd->base->forwardmove, -450.0f, 450.0f);
+	cmd->base->sidemove = std::clamp(cmd->base->sidemove, -450.0f, 450.0f);
+	cmd->base->view->angles.normalize();
+
+	cmd->base->view->angles.x = std::clamp(cmd->base->view->angles.x, -89.0f, 89.0f);
+	cmd->base->view->angles.y = std::clamp(cmd->base->view->angles.y, -180.0f, 180.0f);
+	cmd->base->view->angles.z = 0.0f;
 	return false;
 }
 

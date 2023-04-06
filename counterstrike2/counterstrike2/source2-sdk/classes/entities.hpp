@@ -2,6 +2,8 @@
 
 #include <cstdint>
 
+#include "../../utilities/utilities.hpp"
+#include "../../signatures.hpp"
 #include "../schema_system/schema_system.hpp"
 #include "../math/vec3_t.hpp"
 #include "skeleton.hpp"
@@ -224,9 +226,12 @@ public:
         return *reinterpret_cast<c_skeleton**>((std::uintptr_t)this + 0x300);
     }
 
-    vec3_t get_bone_position(std::uint32_t bone_index)
+    void get_bone_position(std::uint32_t bone_index, vec3_t& position, vec3_t& rotation)
     {
-        return get_skeleton()->model_state.bones[bone_index].location;
+        using function_t = std::int64_t(__fastcall*)(player_t*, std::uint32_t, vec3_t*, vec3_t*);
+        static function_t fn = reinterpret_cast<function_t>(utilities::pattern_scan(L"client.dll", GET_BONE_POSITION));
+
+        fn(this, bone_index, &position, &rotation);
     }
 
     bool is_alive()

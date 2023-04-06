@@ -44,6 +44,14 @@ vec3_t vec3_t::operator*(vec3_t& other)
 	return vec3_t(this->x * other.x, this->y * other.y, this->z * other.z);
 }
 
+vec3_t& vec3_t::operator/=(float factor)
+{
+	this->x /= factor;
+	this->y /= factor;
+	this->z /= factor;
+	return *this;
+}
+
 void vec3_t::clamp()
 {
 	this->x = std::clamp(this->x, -89.0f, 89.0f);

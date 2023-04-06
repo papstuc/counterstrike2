@@ -34,10 +34,22 @@ void menu::render()
 	{
 		if (ImGui::BeginTabBar("##features"))
 		{
-			if (ImGui::BeginTabItem("combat"))
+			if (ImGui::BeginTabItem("legit"))
 			{
-				ImGui::Checkbox("aimbot", &config::context.aimbot);
-				ImGui::SliderFloat("fov", &config::context.aimbot_fov, 1.f, 60.f, "%.2f");
+				ImGui::Checkbox("aimbot", &config::context.legitbot);
+				ImGui::Checkbox("silent", &config::context.silent_aim);
+				ImGui::SliderFloat("fov", &config::context.legit_fov, 1.f, 60.f, "%.2f");
+				ImGui::SliderFloat("smooth", &config::context.smooth, 1.f, 30.f, "%.2f");
+				ImGui::Checkbox("head", &config::context.hitboxes[0]);
+				ImGui::Checkbox("chest", &config::context.hitboxes[1]);
+				ImGui::Checkbox("arms", &config::context.hitboxes[2]);
+				ImGui::Checkbox("legs", &config::context.hitboxes[3]);
+				ImGui::EndTabItem();
+			}
+
+			if (ImGui::BeginTabItem("anti-aim"))
+			{
+				ImGui::Checkbox("enable", &config::context.anti_aim);
 				ImGui::EndTabItem();
 			}
 

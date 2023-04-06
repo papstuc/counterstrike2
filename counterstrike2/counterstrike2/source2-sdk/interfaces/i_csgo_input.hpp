@@ -34,3 +34,5 @@ public:
         fn(this, 0, angles);
     }
 };
+
+//static_assert(sizeof(i_csgo_input) == 0x41D0);

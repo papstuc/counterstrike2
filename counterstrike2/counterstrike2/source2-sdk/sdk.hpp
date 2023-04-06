@@ -4,6 +4,8 @@
 
 #include "classes/entities.hpp"
 #include "classes/global_vars.hpp"
+#include "classes/skeleton.hpp"
+#include "classes/user_cmd.hpp"
 
 #include "interfaces/interfaces.hpp"
 

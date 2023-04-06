@@ -16,8 +16,11 @@ class c_user_cmd_base
 public:
     char pad1[0x40];
     c_cmd_qangle* view;
+    char pad2[0x8];
+    float forwardmove;
+    float sidemove;
 };
-static_assert(sizeof(c_user_cmd_base) == 0x48, "c_user_cmd_base has wrong size");
+static_assert(sizeof(c_user_cmd_base) == 0x58, "c_user_cmd_base has wrong size");
 
 class c_user_cmd
 {

@@ -14,8 +14,13 @@ namespace config
 		bool draw_name = false;
 		bool draw_health = false;
 
-		bool aimbot = false;
-		float aimbot_fov = 1.f;
+		bool legitbot = false;
+		bool silent_aim = false;
+		float legit_fov = 1.f;
+		float smooth = 1.f;
+		bool hitboxes[4] = { false, false, false, false };
+
+		bool anti_aim = false;
 	} config_t;
 
 	typedef struct _file_t

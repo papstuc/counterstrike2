@@ -28,11 +28,12 @@ void combat::run_legitbot(c_user_cmd* cmd)
     float target_fov = config::context.legit_fov;
     vec3_t best_target = vec3_t();
     vec3_t local_eye_position = sdk::local_player->get_eye_position();
+    vec3_t cmd_angles = cmd->base->view->angles;
 
     if (config::context.hitboxes[0])
     {
-        bones.emplace_back(6); // head
         bones.emplace_back(5); // neck
+        bones.emplace_back(6); // head
     }
 
     if (config::context.hitboxes[1])
@@ -94,7 +95,7 @@ void combat::run_legitbot(c_user_cmd* cmd)
         {
             player->get_bone_position(bone_id, bone_position, bone_rotation);
 
-            vec3_t angle = math::calculate_angle(local_eye_position, bone_position, cmd->base->view->angles);
+            vec3_t angle = math::calculate_angle(local_eye_position, bone_position, cmd_angles);
             angle.clamp();
 
             float fov = std::hypotf(angle.x, angle.y);
@@ -113,12 +114,17 @@ void combat::run_legitbot(c_user_cmd* cmd)
         return;
     }
 
-    vec3_t angle = math::calculate_angle(local_eye_position, best_target, cmd->base->view->angles);
+    vec3_t angle = math::calculate_angle(local_eye_position, best_target, cmd_angles);
     angle.clamp();
 
     angle /= config::context.smooth;
 
-    cmd->base->view->angles += angle;
+    cmd_angles += angle;
+    cmd->set_sub_tick_angles(cmd_angles);
 
-    interfaces::csgo_input->set_view_angles(cmd->base->view->angles);
+    if (!config::context.silent_aim)
+    {
+        cmd->base->view->angles = cmd_angles;
+        interfaces::csgo_input->set_view_angles(cmd->base->view->angles);
+    }
 }

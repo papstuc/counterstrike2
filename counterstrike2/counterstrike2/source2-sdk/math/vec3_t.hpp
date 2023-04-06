@@ -20,4 +20,5 @@ public:
 	void clamp();
 	void normalize();
 	bool is_zero();
+	float length();
 };

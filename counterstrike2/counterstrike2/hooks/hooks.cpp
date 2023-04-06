@@ -26,7 +26,6 @@ static hooks::frame_stage_notify::function_t frame_stage_notify_original = nullp
 static hooks::create_move::function_t create_move_original = nullptr;
 static hooks::swap_chain_present::function_t swap_chain_present_original = nullptr;
 static hooks::swap_chain_resize_buffers::function_t swap_chain_resize_buffers_original = nullptr;
-static hooks::mouse_input::function_t mouse_input_original = nullptr;
 static hooks::window_procedure::function_t window_procedure_original = nullptr;
 
 static ID3D11Device* device = nullptr;
@@ -48,8 +47,7 @@ bool hooks::initialize()
 	void* create_move_target = get_virtual(interfaces::csgo_input, csgo_input_vtable::CREATEMOVE);
 	void* swap_chain_present_target = get_virtual(interfaces::renderer->swap_chain, render_vtable::PRESENT);
 	void* swap_chain_resize_buffers_target = get_virtual(interfaces::renderer->swap_chain, render_vtable::RESIZE_BUFFERS);
-	void* mouse_input_target = utilities::pattern_scan(L"client.dll", "40 53 48 83 EC ? 80 B9 ? ? ? ? ? 48 8B D9 75 ? 48 8B 0D");
-	
+
 	if (MH_Initialize() != MH_OK)
 	{
 		debug::log(L"[-] failed to initialize minhook\n");
@@ -81,12 +79,6 @@ bool hooks::initialize()
 	}
 
 	if (MH_CreateHook(swap_chain_resize_buffers_target, &hooks::swap_chain_resize_buffers::hook, reinterpret_cast<void**>(&swap_chain_resize_buffers_original)) != MH_OK)
-	{
-		debug::log(L"[-] failed to hook resize buffers\n");
-		return false;
-	}
-
-	if (MH_CreateHook(mouse_input_target, &hooks::mouse_input::hook, reinterpret_cast<void**>(&mouse_input_original)) != MH_OK)
 	{
 		debug::log(L"[-] failed to hook resize buffers\n");
 		return false;
@@ -143,6 +135,7 @@ bool __fastcall hooks::create_move::hook(void* a1, std::uint32_t a2, std::uint8_
 	cmd->base->view->angles.x = std::clamp(cmd->base->view->angles.x, -89.0f, 89.0f);
 	cmd->base->view->angles.y = std::clamp(cmd->base->view->angles.y, -180.0f, 180.0f);
 	cmd->base->view->angles.z = 0.0f;
+
 	return false;
 }
 
@@ -226,16 +219,6 @@ HRESULT __fastcall hooks::swap_chain_resize_buffers::hook(IDXGISwapChain* swap_c
 	ImGui::DestroyContext();
 
 	return swap_chain_resize_buffers_original(swap_chain, buffer_count, width, height, new_format, swap_chain_flags);
-}
-
-bool __fastcall hooks::mouse_input::hook(std::int64_t a1)
-{
-	if (menu::open)
-	{
-		return false;
-	}
-
-	return mouse_input_original(a1);
 }
 
 LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);

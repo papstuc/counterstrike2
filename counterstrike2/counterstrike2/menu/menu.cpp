@@ -38,7 +38,7 @@ void menu::render()
 			{
 				ImGui::Checkbox("aimbot", &config::context.legitbot);
 				ImGui::Checkbox("silent", &config::context.silent_aim);
-				ImGui::SliderFloat("fov", &config::context.legit_fov, 1.f, 60.f, "%.2f");
+				ImGui::SliderFloat("fov", &config::context.legit_fov, 1.f, 180.f, "%.2f");
 				ImGui::SliderFloat("smooth", &config::context.smooth, 1.f, 30.f, "%.2f");
 				ImGui::Checkbox("head", &config::context.hitboxes[0]);
 				ImGui::Checkbox("chest", &config::context.hitboxes[1]);

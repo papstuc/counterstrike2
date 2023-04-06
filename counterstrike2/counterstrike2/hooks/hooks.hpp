@@ -39,12 +39,6 @@ namespace hooks
 		HRESULT __fastcall hook(IDXGISwapChain* swap_chain, std::uint32_t buffer_count, std::uint32_t width, std::uint32_t height, DXGI_FORMAT new_format, std::uint32_t swap_chain_flags);
 	}
 
-	namespace mouse_input
-	{
-		using function_t = bool(__fastcall*)(std::int64_t);
-		bool __fastcall hook(std::int64_t a1);
-	}
-
 	namespace window_procedure
 	{
 		using function_t = LRESULT(__stdcall*)(HWND, std::uint32_t, WPARAM, LPARAM);

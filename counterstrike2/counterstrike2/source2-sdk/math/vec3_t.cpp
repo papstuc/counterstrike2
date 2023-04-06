@@ -75,3 +75,8 @@ bool vec3_t::is_zero()
 
 	return false;
 }
+
+float vec3_t::length()
+{
+	return std::sqrt(this->x * this->x + this->y * this->y + this->z * this->z);
+}

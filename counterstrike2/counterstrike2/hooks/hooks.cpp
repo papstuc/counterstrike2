@@ -120,10 +120,16 @@ bool __fastcall hooks::create_move::hook(void* a1, std::uint32_t a2, std::uint8_
 	sdk::update_local_player();
 	c_user_cmd* cmd = interfaces::csgo_input->get_user_cmd(a1, a2);
 
+	if (!cmd)
+	{
+		return create_move_original(a1, a2, a3);
+	}
+
 	vec3_t old_viewangles = cmd->base->view->angles;
 	float old_forwardmove = cmd->base->forwardmove;
 	float old_sidemove = cmd->base->sidemove;
 
+	anti_aim::run_anti_aim(cmd);
 	combat::run_legitbot(cmd);
 
 	math::correct_movement(old_viewangles, cmd, old_forwardmove, old_sidemove);

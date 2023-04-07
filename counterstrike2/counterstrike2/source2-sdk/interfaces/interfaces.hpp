@@ -20,7 +20,7 @@ namespace interfaces
 	extern i_renderer* renderer;
 	extern i_schema_system* schema_system;
 	extern i_trace* trace;
-	extern global_vars_t* globals;
+	extern c_global_vars* globals;
 
 	bool initialize();
 }

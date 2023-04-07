@@ -27,7 +27,6 @@ vec3_t vec3_t::operator+(vec3_t& other)
 	return vec3_t(this->x + other.x, this->y + other.y, this->z + other.z);
 }
 
-
 vec3_t vec3_t::operator-(vec3_t& other)
 {
 	return vec3_t(this->x - other.x, this->y - other.y, this->z - other.z);
@@ -42,6 +41,21 @@ vec3_t& vec3_t::operator+=(vec3_t& other)
 vec3_t vec3_t::operator*(vec3_t& other)
 {
 	return vec3_t(this->x * other.x, this->y * other.y, this->z * other.z);
+}
+
+vec3_t vec3_t::operator*(float factor)
+{
+	return vec3_t(this->x * factor, this->y * factor, this->z * factor);
+}
+
+vec3_t vec3_t::operator/(float factor)
+{
+	return vec3_t(this->x / factor, this->y / factor, this->z / factor);
+}
+
+vec3_t vec3_t::operator/(vec3_t& other)
+{
+	return vec3_t(this->x / other.x, this->y / other.y, this->z / other.z);
 }
 
 vec3_t& vec3_t::operator/=(float factor)

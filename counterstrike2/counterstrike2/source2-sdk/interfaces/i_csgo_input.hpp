@@ -33,6 +33,12 @@ public:
 
         fn(this, 0, angles);
     }
-};
 
-//static_assert(sizeof(i_csgo_input) == 0x41D0);
+    void get_view_angles(vec3_t& angles)
+    {
+        using function_t = void*(__fastcall*)(i_csgo_input*, std::int32_t);
+        static function_t fn = reinterpret_cast<function_t>(utilities::pattern_scan(L"client.dll", GET_VIEW_ANGLES));
+
+        angles = *reinterpret_cast<vec3_t*>(fn(this, 0));
+    }
+};

@@ -7,7 +7,6 @@
 #include "hooks/hooks.hpp"
 #include "menu/menu.hpp"
 
-
 DWORD WINAPI initialize(void* instance)
 {
 #ifdef _DEBUG

@@ -49,7 +49,9 @@ void menu::render()
 
 			if (ImGui::BeginTabItem("anti-aim"))
 			{
-				ImGui::Checkbox("enable", &config::context.anti_aim);
+				ImGui::Checkbox("anti aim", &config::context.anti_aim);
+				ImGui::Checkbox("fake lag", &config::context.fake_lag);
+				ImGui::SliderInt("choke amount", &config::context.tick_choke_amount, 0, 20, "%d");
 				ImGui::EndTabItem();
 			}
 

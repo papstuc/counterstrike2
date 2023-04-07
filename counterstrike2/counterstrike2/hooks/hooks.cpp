@@ -9,6 +9,8 @@
 #include "../combat/combat.hpp"
 #include "../combat/anti_aim.hpp"
 #include "../menu/menu.hpp"
+#include "../prediction/prediction.hpp"
+#include "../movement/movement.hpp"
 
 #include "../utilities/imgui/imgui.h"
 #include "../utilities/imgui/imgui_internal.h"
@@ -24,6 +26,7 @@
 static hooks::level_init::function_t level_init_original = nullptr;
 static hooks::frame_stage_notify::function_t frame_stage_notify_original = nullptr;
 static hooks::create_move::function_t create_move_original = nullptr;
+static hooks::send_move::function_t send_move_original = nullptr;
 static hooks::swap_chain_present::function_t swap_chain_present_original = nullptr;
 static hooks::swap_chain_resize_buffers::function_t swap_chain_resize_buffers_original = nullptr;
 static hooks::window_procedure::function_t window_procedure_original = nullptr;
@@ -43,6 +46,7 @@ bool hooks::initialize()
 {
 	void* level_init_target = utilities::pattern_scan(L"client.dll", LEVEL_INIT);
 	void* frame_stage_notify_target = utilities::pattern_scan(L"client.dll", FRAME_STAGE_NOTIFY);
+	void* send_move_target = utilities::pattern_scan(L"engine2.dll", SEND_MOVE);
 
 	void* create_move_target = get_virtual(interfaces::csgo_input, csgo_input_vtable::CREATEMOVE);
 	void* swap_chain_present_target = get_virtual(interfaces::renderer->swap_chain, render_vtable::PRESENT);
@@ -63,6 +67,12 @@ bool hooks::initialize()
 	if (MH_CreateHook(frame_stage_notify_target, &hooks::frame_stage_notify::hook, reinterpret_cast<void**>(&frame_stage_notify_original)) != MH_OK)
 	{
 		debug::log(L"[-] failed to hook frame stage notify\n");
+		return false;
+	}
+
+	if (MH_CreateHook(send_move_target, &hooks::send_move::hook, reinterpret_cast<void**>(&send_move_original)) != MH_OK)
+	{
+		debug::log(L"[-] failed to hook create move\n");
 		return false;
 	}
 
@@ -113,11 +123,23 @@ std::int64_t __fastcall hooks::frame_stage_notify::hook(std::int64_t a1, std::in
 	return frame_stage_notify_original(a1, a2);
 }
 
+std::int64_t __stdcall hooks::send_move::hook(DWORD* a1)
+{
+	/*if (anti_aim::should_choke())
+	{
+		return 0;
+	}*/
+
+	return send_move_original(a1);
+}
+
 bool __fastcall hooks::create_move::hook(void* a1, std::uint32_t a2, std::uint8_t a3)
 {
 	create_move_original(a1, a2, a3);
 
+	sdk::update_local_controller();
 	sdk::update_local_player();
+
 	c_user_cmd* cmd = interfaces::csgo_input->get_user_cmd(a1, a2);
 
 	if (!cmd)
@@ -130,7 +152,12 @@ bool __fastcall hooks::create_move::hook(void* a1, std::uint32_t a2, std::uint8_
 	float old_sidemove = cmd->base->sidemove;
 
 	anti_aim::run_anti_aim(cmd);
-	combat::run_legitbot(cmd);
+	//prediction::start(cmd);
+	{
+		combat::run_legitbot(cmd);
+		movement::run_bhop(cmd);
+	}
+	//prediction::end();
 
 	math::correct_movement(old_viewangles, cmd, old_forwardmove, old_sidemove);
 

@@ -11,17 +11,21 @@
 #define deg_to_rad(x)  ((float)(x) * (float)(M_PI / 180.f))
 #define rad_to_deg(x)  ((float)(x) * (float)(180.f / M_PI))
 
-bool math::world_to_screen(vec3_t& origin, vec3_t& screen)
+bool math::world_to_screen(vec3_t& origin, vec2_t& screen)
 {
 	using function_t = bool(__fastcall*)(vec3_t&, vec3_t&);
 	static function_t function = reinterpret_cast<function_t>(utilities::pattern_scan(L"client.dll", WORLD_TO_SCREEN));
 
-    bool status = !function(origin, screen);
+	vec3_t out = { };
+	if (function(origin, out))
+	{
+		return false;
+	}
 
-    screen.x = static_cast<float>((screen.x + 1.0) * 0.5) * sdk::screen_width;
-    screen.y = sdk::screen_height - (static_cast<float>((screen.y + 1.0) * 0.5) * sdk::screen_height);
+    screen.x = (1.0f + out.x) * static_cast<float>(sdk::screen_width * 0.5);
+    screen.y = (1.0f - out.y) * static_cast<float>(sdk::screen_height * 0.5);
 
-    return status;
+    return true;
 }
 
 vec3_t math::calculate_angle(vec3_t& source, vec3_t& destination, vec3_t& view_angles)

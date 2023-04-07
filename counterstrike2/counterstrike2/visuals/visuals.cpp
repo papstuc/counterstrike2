@@ -15,7 +15,7 @@ static bool get_bounding_box(player_t* player, box_t& box)
 {
 	vec3_t origin = player->game_scene_node()->abs_origin();
 
-	vec3_t flb, brt, blb, frt, frb, brb, blt, flt = { };
+	vec2_t flb, brt, blb, frt, frb, brb, blt, flt = { };
 	float left, top, right, bottom = 0.f;
 
 	vec3_t min = player->collision_property()->mins() + origin;
@@ -43,7 +43,7 @@ static bool get_bounding_box(player_t* player, box_t& box)
 		return false;
 	}
 
-	std::array<vec3_t, 8> arr = { flb, brt, blb, frt, frb, brb, blt, flt };
+	std::array<vec2_t, 8> arr = { flb, brt, blb, frt, frb, brb, blt, flt };
 
 	left = flb.x;
 	top = flb.y;
@@ -167,7 +167,7 @@ void visuals::run_player_esp()
 			continue;
 		}
 
-		if (!player || !player->is_alive())
+		if (!player || !player->is_alive() || player == sdk::local_player)
 		{
 			continue;
 		}

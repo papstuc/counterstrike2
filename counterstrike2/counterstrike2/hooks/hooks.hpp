@@ -27,6 +27,12 @@ namespace hooks
 		bool __fastcall hook(void* input, std::uint32_t a2, std::uint8_t a3);
 	}
 
+	namespace send_move
+	{
+		using function_t = std::int64_t(__fastcall*)(DWORD*);
+		std::int64_t __stdcall hook(DWORD* a1);
+	}
+
 	namespace swap_chain_present
 	{
 		using function_t = HRESULT(__fastcall*)(IDXGISwapChain*, std::uint32_t, std::uint32_t);

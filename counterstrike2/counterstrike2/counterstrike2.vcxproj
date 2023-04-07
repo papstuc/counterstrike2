@@ -33,6 +33,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
@@ -88,7 +89,10 @@
     <ClCompile Include="combat\combat.cpp" />
     <ClCompile Include="config\config.cpp" />
     <ClCompile Include="hooks\hooks.cpp" />
+    <ClCompile Include="input\input.cpp" />
     <ClCompile Include="menu\menu.cpp" />
+    <ClCompile Include="movement\movement.cpp" />
+    <ClCompile Include="prediction\prediction.cpp" />
     <ClCompile Include="source2-sdk\math\color_t.cpp" />
     <ClCompile Include="source2-sdk\math\math.cpp" />
     <ClCompile Include="source2-sdk\math\vec2_t.cpp" />
@@ -122,7 +126,10 @@
     <ClInclude Include="combat\combat.hpp" />
     <ClInclude Include="config\config.hpp" />
     <ClInclude Include="hooks\hooks.hpp" />
+    <ClInclude Include="input\input.hpp" />
     <ClInclude Include="menu\menu.hpp" />
+    <ClInclude Include="movement\movement.hpp" />
+    <ClInclude Include="prediction\prediction.hpp" />
     <ClInclude Include="signatures.hpp" />
     <ClInclude Include="source2-sdk\classes\skeleton.hpp" />
     <ClInclude Include="source2-sdk\classes\entities.hpp" />
@@ -171,5 +178,6 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
   </ImportGroup>
 </Project>

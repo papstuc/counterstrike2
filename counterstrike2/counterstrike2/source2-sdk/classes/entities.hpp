@@ -13,8 +13,11 @@ enum buttons_t : std::uint32_t
     in_attack = 1,
     in_jump = 2,
     in_duck = 4,
-    in_forward = 8,
-    in_attack2 = 2048
+    in_attack2 = 2048,
+    in_moveforward = 8,
+    in_moveback = 16,
+    in_moveleft = 512,
+    in_moveright = 1024
 };
 
 enum movetype_t : std::uint32_t
@@ -90,67 +93,6 @@ public:
     SCHEMA("CGameSceneNode", "m_bDormant", dormant, bool);
 };
 
-class CGameSceneNode
-{
-public:
-    class CSkeletonInstance* GetSkeletonInstance()
-    {
-        using function = class CSkeletonInstance* (*)();
-
-        return (*reinterpret_cast<function**>(this))[8]();
-    }
-};
-
-class Quaternion
-{
-public:
-    float x, y, z, w;
-    float operator[](int i) const { if (i == 1) return x; if (i == 2) return y; if (y == 3) return z; return w; };
-    float& operator[](int i) { if (i == 1) return x; if (i == 2) return y; if (y == 3) return z; return w; };
-};
-
-
-struct CBoneData
-{
-    vec3_t Location;
-    float Scale;
-    Quaternion Rotation;
-};
-
-class CModelState /* "client" */
-{
-public:
-    unsigned char pad_0[0x80]; // 0x0 - 0xA0
-    CBoneData* m_boneArray;
-    unsigned char pad_88[0x18];
-    void* m_hModel; // 0xA0 - 0xA8
-    const char* m_ModelName; // 0xA8 - 0xB0
-    unsigned char pad_B0[0x38]; // 0xB0 - 0xE8
-    bool m_bClientClothCreationSuppressed; // 0xE8 - 0xE9
-    unsigned char pad_E9[0x97]; // 0xE9 - 0x180
-    uint64_t m_MeshGroupMask; // 0x180 - 0x188
-    unsigned char pad_188[0x9A]; // 0x188 - 0x222
-    int8_t m_nIdealMotionType; // 0x222 - 0x223
-    int8_t m_nForceLOD; // 0x223 - 0x224
-    int8_t m_nClothUpdateFlags; // 0x224 - 0x225
-    unsigned char pad_225[0xB]; // 0x225 - 0x230
-}; // size - 0x230
-
-class CSkeletonInstance /* "client" */ : public CGameSceneNode /* "client" */
-{
-public:
-    unsigned char pad_150[0x10]; // 0x150 - 0x160
-    CModelState m_modelState; // 0x160 - 0x390
-    bool m_bIsAnimationEnabled; // 0x390 - 0x391
-    bool m_bUseParentRenderBounds; // 0x391 - 0x392
-    bool m_bDisableSolidCollisionsForHierarchy; // 0x392 - 0x393
-    unsigned char m_bDirtyMotionType : 1; // 0x393 - 0x394
-    unsigned char m_bIsGeneratingLatchedParentSpaceState : 1; // 0x393 - 0x394
-    char pad1[0x4];
-    uint8_t m_nHitboxSet; // 0x398 - 0x399
-    unsigned char pad_399[0x57]; // 0x399 - 0x3F0
-}; // size - 0x3F0
-
 class collision_property_t
 {
 public:
@@ -198,6 +140,10 @@ public:
     SCHEMA("C_BaseEntity", "m_pCollision", collision_property, collision_property_t*);
     SCHEMA("C_BaseEntity", "m_hOwnerEntity", owner_handle, std::uint32_t);
     SCHEMA("C_BaseEntity", "m_flSimulationTime", simulation_time, float);
+    SCHEMA("C_BaseEntity", "m_MoveType", move_type, movetype_t);
+    SCHEMA("C_BaseEntity", "m_fFlags", flags, flags_t);
+    SCHEMA("C_BaseEntity", "m_vecVelocity", velocity, vec3_t);
+
 };
 
 class player_t : public entity_t
@@ -213,12 +159,7 @@ public:
 
     vec3_t get_eye_position()
     {
-        vec3_t position;
-        using function_t = void*(__fastcall*)(player_t*, vec3_t&);
-
-        (*reinterpret_cast<function_t**>(this))[154](this, position);
-
-        return position;
+        return this->game_scene_node()->vec_origin() + this->view_offset();
     }
 
     c_skeleton* get_skeleton()
@@ -247,4 +188,5 @@ public:
     SCHEMA("CBasePlayerController", "m_hPawn", pawn_handle, std::uint32_t);
     SCHEMA("CBasePlayerController", "m_bIsLocalPlayerController", is_local_player_controller, bool);
     SCHEMA("CCSPlayerController", "m_sSanitizedPlayerName", name, const char*);
+    SCHEMA("CBasePlayerController", "m_nTickBase", tick_base, std::uint32_t);
 };

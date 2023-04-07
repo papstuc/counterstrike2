@@ -31,6 +31,12 @@ public:
 		return static_cast<player_t*>(fn(0));
 	}
 
+	controller_t* get_local_controller()
+	{
+		static controller_t* controller = reinterpret_cast<controller_t*>(utilities::resolve_rip(utilities::pattern_scan(L"client.dll", GET_LOCAL_CONTROLLER), 2, 6));
+		return controller;
+	}
+
 	entity_t* get_entity_from_handle(std::uint32_t handle)
 	{
 		using function_t = entity_t*(__fastcall*)(i_entity_list*, std::uint32_t);

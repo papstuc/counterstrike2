@@ -5,4 +5,5 @@
 namespace anti_aim
 {
 	void run_anti_aim(c_user_cmd* cmd);
+	bool should_choke();
 }

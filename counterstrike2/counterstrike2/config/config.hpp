@@ -23,6 +23,8 @@ namespace config
 		bool anti_aim = false;
 		bool fake_lag = false;
 		std::int32_t tick_choke_amount = 0;
+
+		bool bhop = false;
 	} config_t;
 
 	typedef struct _file_t

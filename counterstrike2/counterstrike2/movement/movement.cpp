@@ -1,9 +1,14 @@
 #include "movement.hpp"
 
+#include "../config/config.hpp"
 #include "../source2-sdk/sdk.hpp"
 
 void movement::run_bhop(c_user_cmd* cmd)
 {
+    if (!config::context.bhop)
+    {
+        return;
+    }
 
     if (!interfaces::engine->is_connected() || !interfaces::engine->is_in_game())
     {

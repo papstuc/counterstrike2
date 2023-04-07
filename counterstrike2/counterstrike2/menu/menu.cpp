@@ -65,6 +65,12 @@ void menu::render()
 				ImGui::EndTabItem();
 			}
 
+			if (ImGui::BeginTabItem("movement"))
+			{
+				ImGui::Checkbox("bhop", &config::context.bhop);
+				ImGui::EndTabItem();
+			}
+
 			ImGui::EndTabBar();
 		}
 		ImGui::End();

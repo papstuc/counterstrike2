@@ -43,7 +43,6 @@ void prediction::end()
 	interfaces::globals->frame_time2 = old_current_time;
 }
 
-
 std::uint32_t prediction::get_predicted_flags()
 {
 	return predicted_flags;

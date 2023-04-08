@@ -21,8 +21,7 @@
 #define GET_VIEW_ANGLES "48 63 C2 48 69 D0 ? ? ? ? 48 8D 81"
 
 // i_trace.hpp
-#define CLIP_TRACE_TO_PLAYERS "48 8B C4 55 56 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 48 89 58"
-#define TRACE_SHAPE "48 89 54 24 ? 48 89 4C 24 ? 55 53 56 57 41 55 41 56 48 8D AC 24"
+#define TRACE_SHAPE "48 89 54 24 ? 48 89 4C 24 ? 55 53 56 57 41 56 41 57"
 
 // interfaces.cpp
 #define CLIENT_MODE "48 8B 0D ? ? ? ? 48 85 C9 74 44 F6 42 10 20 74 14 48 8B 01 4C 8D 4F 70"
@@ -30,7 +29,7 @@
 #define ENTITY_LIST "48 8B 0D ? ? ? ? 8B D3 E8 ? ? ? ? 48 8B F0"
 #define GLOBAL_VARS "48 8B 05 ? ? ? ? 4C 8D 0D ? ? ? ? F2 0F 11 74 24 ? 4C 8D 05 ? ? ? ? BA"
 #define RENDERER "66 0F 7F 05 ? ? ? ? 66 0F 7F 0D ? ? ? ? 48 89 35"
-#define TRACE_MANAGER "48 8B 05 ? ? ? ? 80 A4 24"
+#define TRACE_MANAGER "48 8B 1D ? ? ? ? 24 ? 0F 11 45"
 
 // math.cpp
 #define WORLD_TO_SCREEN "48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC ? 48 8B 1D ? ? ? ? 48 8B FA 48 8B F1"

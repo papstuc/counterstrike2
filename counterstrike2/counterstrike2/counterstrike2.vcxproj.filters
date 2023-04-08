@@ -120,6 +120,9 @@
     <ClCompile Include="movement\movement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source2-sdk\classes\trace.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utilities\debug_console\debug.hpp">
@@ -279,6 +282,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="movement\movement.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source2-sdk\classes\trace.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

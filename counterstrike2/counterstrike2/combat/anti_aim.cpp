@@ -72,5 +72,5 @@ bool anti_aim::should_choke()
         return false;
     }
 
-    return false;
+    return true;
 }

@@ -20,6 +20,8 @@ public:
 	vec3_t operator/(vec3_t& other);
 	vec3_t& operator/=(float factor);
 
+
+
 	void clamp();
 	void normalize();
 	bool is_zero();

@@ -8,6 +8,18 @@
 
 static std::vector<std::uint32_t> bones;
 
+bool can_see_player_position(player_t* player, vec3_t& position)
+{
+    c_trace_filter filter(0x1C300B, sdk::local_player, 3);
+    c_ray ray;
+    c_game_trace trace;
+
+    vec3_t eye_position = sdk::local_player->get_eye_position();
+    interfaces::trace->trace_shape(&ray, eye_position, position, &filter, &trace);
+
+    return trace.entity == player || trace.fraction > 0.97f;
+}
+
 void combat::run_legitbot(c_user_cmd* cmd)
 {
 	if (!config::context.legitbot)
@@ -94,6 +106,11 @@ void combat::run_legitbot(c_user_cmd* cmd)
         for (std::uint32_t bone_id : bones)
         {
             player->get_bone_position(bone_id, bone_position, bone_rotation);
+
+            if (!can_see_player_position(player, bone_position))
+            {
+                continue;
+            }
 
             vec3_t angle = math::calculate_angle(local_eye_position, bone_position, cmd_angles);
             angle.clamp();

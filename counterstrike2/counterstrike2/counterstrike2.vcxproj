@@ -93,6 +93,7 @@
     <ClCompile Include="menu\menu.cpp" />
     <ClCompile Include="movement\movement.cpp" />
     <ClCompile Include="prediction\prediction.cpp" />
+    <ClCompile Include="source2-sdk\classes\trace.cpp" />
     <ClCompile Include="source2-sdk\math\color_t.cpp" />
     <ClCompile Include="source2-sdk\math\math.cpp" />
     <ClCompile Include="source2-sdk\math\vec2_t.cpp" />
@@ -133,6 +134,7 @@
     <ClInclude Include="signatures.hpp" />
     <ClInclude Include="source2-sdk\classes\skeleton.hpp" />
     <ClInclude Include="source2-sdk\classes\entities.hpp" />
+    <ClInclude Include="source2-sdk\classes\trace.hpp" />
     <ClInclude Include="source2-sdk\classes\user_cmd.hpp" />
     <ClInclude Include="source2-sdk\interfaces\i_client.hpp" />
     <ClInclude Include="source2-sdk\interfaces\i_csgo_input.hpp" />

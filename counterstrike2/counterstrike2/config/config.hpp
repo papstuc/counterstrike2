@@ -13,6 +13,7 @@ namespace config
 		bool draw_box = false;
 		bool draw_name = false;
 		bool draw_health = false;
+		bool draw_skeleton = false;
 
 		bool legitbot = false;
 		bool silent_aim = false;

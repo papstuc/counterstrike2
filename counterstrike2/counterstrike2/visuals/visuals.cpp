@@ -132,6 +132,48 @@ static void draw_name(box_t& box, const char* player_name)
 	renderer::text_centered(box.x, box.y, box.w, box.h, color_t::white(), name.c_str());
 }
 
+static void draw_skeleton(player_t* player)
+{
+	if (!config::context.draw_skeleton)
+	{
+		return;
+	}
+
+	constexpr std::uint8_t tr[][2] =
+	{
+		{ 84, 26 },{ 26, 25 },{ 25, 0 },	// right leg
+		{ 82, 23 },{ 23, 22 },{ 22, 0 },	// left leg
+		{ 5, 92 },{ 92, 11 },{ 11, 12 },	// left arm
+		{ 5, 96 },{ 96, 16 },{ 16, 17 },	// right arm
+		{ 0, 21 },{ 21, 5 },{ 5, 6 }		// spine
+	};
+
+	constexpr std::uint8_t ct[][2] =
+	{
+		{ 97, 27 },{ 27, 26 },{ 26, 0 },	// right leg
+		{ 95, 24 },{ 24, 23 },{ 23, 0 },	// left leg
+		{ 5, 55 },{ 55, 11 },{ 11, 12 },	// left arm
+		{ 5, 105 },{ 105, 16 },{ 16, 17 },	// right arm
+		{ 0, 21 },{ 21, 5 },{ 5, 6 }		// spine
+	};
+
+	for (std::uint8_t i = 0; i < 15; ++i)
+	{
+		vec3_t rotation1, rotation2 = { };
+		vec2_t position1, position2 = { };
+		vec3_t from = { };
+		vec3_t to = { };
+
+		player->get_bone_position(player->team() == 2 ? tr[i][0] : ct[i][0], from, rotation1);
+		player->get_bone_position(player->team() == 2 ? tr[i][1] : ct[i][1], to, rotation2);
+
+		if (math::world_to_screen(from, position1) && math::world_to_screen(to, position2))
+		{
+			renderer::line(position1.x, position1.y, position2.x, position2.y, color_t::white());
+		}
+	}
+}
+
 void visuals::run_player_esp()
 {
 	if (!config::context.player_esp)
@@ -185,5 +227,6 @@ void visuals::run_player_esp()
 		draw_box(box);
 		draw_health(box, player->health());
 		draw_name(box, controller->name());
+		draw_skeleton(player);
 	}
 }

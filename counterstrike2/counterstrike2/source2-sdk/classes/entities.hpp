@@ -106,33 +106,6 @@ public:
     }
 };
 
-class econ_item_view_t
-{
-public:
-    SCHEMA("CEconItemView", "m_iItemIDHigh", item_id_high, std::int32_t);
-};
-
-class attribute_container_t
-{
-public:
-    SCHEMA("CAttributeContainer", "m_Item", item, econ_item_view_t*);
-};
-
-class econ_entity_t
-{
-public:
-    SCHEMA("CEconEntity", "m_flFallbackWear", fallback_wear, float);
-    SCHEMA("CEconEntity", "m_nFallbackSeed", attribute_manager, attribute_container_t*);
-    SCHEMA("CEconEntity", "m_nFallbackSeed", fallback_seed, std::int32_t);
-    SCHEMA("CEconEntity", "m_nFallbackPaintKit", fallback_paintkit, std::int32_t);
-};
-
-class weapon_services_t
-{
-public:
-    SCHEMA("CPlayer_WeaponServices", "m_hMyWeapons", weapons, econ_entity_t*);
-};
-
 class entity_t
 {
 public:
@@ -144,6 +117,21 @@ public:
     SCHEMA("C_BaseEntity", "m_fFlags", flags, flags_t);
     SCHEMA("C_BaseEntity", "m_vecVelocity", velocity, vec3_t);
 
+};
+
+class weapon_t : public entity_t
+{
+public:
+    SCHEMA("C_BasePlayerWeapon", "m_nNextPrimaryAttackTick", next_primary_attack, float);
+    SCHEMA("C_BasePlayerWeapon", "m_nNextSecondaryAttackTick", next_secondary_attack, float);
+    SCHEMA("C_BasePlayerWeapon", "m_iClip1", clip1_count, std::int32_t);
+    SCHEMA("C_BasePlayerWeapon", "m_iClip2", clip2_count, std::int32_t);
+};
+
+class weapon_services_t
+{
+public:
+    SCHEMA("CPlayer_WeaponServices", "m_hActiveWeapon", active_weapon, std::uint32_t);
 };
 
 class player_t : public entity_t

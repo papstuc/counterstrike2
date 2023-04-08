@@ -11,8 +11,8 @@ static std::vector<std::uint32_t> bones;
 bool can_see_player_position(player_t* player, vec3_t& position)
 {
     c_trace_filter filter(0x1C300B, sdk::local_player, 3);
-    c_ray ray;
-    c_game_trace trace;
+    c_ray ray = { };
+    c_game_trace trace = { };
 
     vec3_t eye_position = sdk::local_player->get_eye_position();
     interfaces::trace->trace_shape(&ray, eye_position, position, &filter, &trace);
@@ -33,6 +33,11 @@ void combat::run_legitbot(c_user_cmd* cmd)
     }
 
     if (!sdk::local_player || !sdk::local_player->is_alive())
+    {
+        return;
+    }
+
+    if (sdk::local_player->move_type() == movetype_t::movetype_ladder || sdk::local_player->move_type() == movetype_t::movetype_noclip)
     {
         return;
     }
@@ -99,7 +104,6 @@ void combat::run_legitbot(c_user_cmd* cmd)
             continue;
 
         }
-
         vec3_t bone_position = { };
         vec3_t bone_rotation = { };
 

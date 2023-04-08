@@ -11,6 +11,7 @@
 #include "../menu/menu.hpp"
 #include "../prediction/prediction.hpp"
 #include "../movement/movement.hpp"
+#include "../input/input.hpp"
 
 #include "../utilities/imgui/imgui.h"
 #include "../utilities/imgui/imgui_internal.h"
@@ -262,6 +263,8 @@ LRESULT __stdcall hooks::window_procedure::hook(HWND hwnd, std::uint32_t message
 	{
 		menu::open = !menu::open;
 	}
+
+	input::handle(message, wparam);
 
 	LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 	ImGui_ImplWin32_WndProcHandler(hwnd, message, wparam, lparam);

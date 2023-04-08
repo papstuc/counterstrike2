@@ -62,6 +62,7 @@ void menu::render()
 				ImGui::Checkbox("box", &config::context.draw_box);
 				ImGui::Checkbox("name", &config::context.draw_name);
 				ImGui::Checkbox("health", &config::context.draw_health);
+				ImGui::Checkbox("skeleton", &config::context.draw_skeleton);
 				ImGui::EndTabItem();
 			}
 

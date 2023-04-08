@@ -27,6 +27,6 @@ void movement::run_bhop(c_user_cmd* cmd)
 
     if (!(sdk::local_player->flags() & fl_onground))
     {
-        cmd->buttons &= ~in_jump;
+        cmd->buttons &= ~buttons_t::in_jump;
     }
 }

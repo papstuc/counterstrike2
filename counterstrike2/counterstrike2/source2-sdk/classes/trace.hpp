@@ -32,7 +32,7 @@ public:
 	std::uint16_t N0000011C;
 	std::uint8_t layer;
 	std::uint8_t N00000104;
-	std::uint8_t N000000E0;
+	std::uint8_t null_it3;
 
 	virtual ~c_trace_filter()
 	{

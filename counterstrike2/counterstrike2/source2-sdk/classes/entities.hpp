@@ -152,7 +152,7 @@ public:
 
     c_skeleton* get_skeleton()
     {
-        return *reinterpret_cast<c_skeleton**>((std::uintptr_t)this + 0x300);
+        return *reinterpret_cast<c_skeleton**>(reinterpret_cast<std::uintptr_t>(this) + 0x300);
     }
 
     void get_bone_position(std::uint32_t bone_index, vec3_t& position, vec3_t& rotation)

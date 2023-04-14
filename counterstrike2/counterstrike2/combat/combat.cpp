@@ -8,7 +8,7 @@
 
 static std::vector<std::uint32_t> bones;
 
-bool can_see_player_position(player_t* player, vec3_t& position)
+static bool can_see_player_position(player_t* player, vec3_t& position)
 {
     c_trace_filter filter(0x1C300B, sdk::local_player, 3);
     c_ray ray = { };

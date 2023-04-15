@@ -16,7 +16,7 @@ void sdk::update_local_controller()
 		return;
 	}
 
-
+	sdk::local_controller = interfaces::entity_list->get_local_controller();
 }
 
 void sdk::update_local_player()

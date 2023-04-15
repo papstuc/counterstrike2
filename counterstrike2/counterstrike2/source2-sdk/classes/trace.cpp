@@ -13,13 +13,13 @@ c_trace_filter::c_trace_filter(std::uint64_t trace_mask, player_t* local_player,
 	this->skip_handle3 = 0;
 	this->skip_handle4 = 0;
 
-	this->collission1 = local_player->collision_property()->get_collision_mask();
-	this->collission2 = 0;
+	this->collision1 = local_player->collision_property()->get_collision_mask();
+	this->collision2 = 0;
 
 	this->N0000011C = 7;
 
 	this->layer = layer;
 
 	this->N00000104 = 0x49;
-	this->N000000E0 = 0;
+	this->null_it3 = 0;
 }

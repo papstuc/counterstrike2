@@ -27,8 +27,8 @@ public:
 	std::uint32_t skip_handle2;
 	std::uint32_t skip_handle3;
 	std::uint32_t skip_handle4;
-	std::uint16_t collission1;
-	std::uint16_t collission2;
+	std::uint16_t collision1;
+	std::uint16_t collision2;
 	std::uint16_t N0000011C;
 	std::uint8_t layer;
 	std::uint8_t N00000104;
